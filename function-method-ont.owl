@@ -1,0 +1,698 @@
+@prefix : <http://www.co-ode.org/ontologies/ont.owl#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.co-ode.org/ontologies/ont.owl> .
+
+<http://www.co-ode.org/ontologies/ont.owl> rdf:type owl:Ontology ;
+                                            owl:imports <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl> ;
+                                            rdfs:comment """Capability, functionality, and engineering methods ontology.
+
+Attachment to the paper \"About functions, behaviours, and capabilities
+in formal ontology and engineering\" in submission to the Semantic Web Journal, this ontology exemplify how the first order theory described in the paper can be translated in OWL.
+
+The DOLCE Lite oontology can be downloaded from the url http://www.loa.istc.cnr.it/dolce/overview.html"""@en .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.co-ode.org/ontologies/ont.owl#ohms
+:ohms rdf:type rdfs:Datatype .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#volts
+:volts rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.co-ode.org/ontologies/ont.owl#causally-contributes-to
+:causally-contributes-to rdf:type owl:ObjectProperty ;
+                         rdfs:domain :Perdurant ;
+                         rdfs:range :Perdurant ;
+                         rdfs:isDefinedBy "This relation abstracts causal explanations of complex occurences.  For example, \"the beam was cut, therefore it fell to the floor\": we could introduce in the domain of discourse two perdurants: \"cutting the beam [in some context]\" and \"falling to the floor [in some context]\" and then state causally-contributes-to(\"cutting the beam\", \"falling to the floor\")" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#classified-by
+:classified-by rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               owl:inverseOf :classifies .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#classifies
+:classifies rdf:type owl:ObjectProperty .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#component-of
+:component-of rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf :part-of ;
+              rdfs:domain :TechnicalArtifact ;
+              rdfs:range :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#concept-founded-on
+:concept-founded-on rdf:type owl:ObjectProperty ;
+                    rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#definitionally-founded-on
+:definitionally-founded-on rdf:type owl:ObjectProperty ;
+                           rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#depends-on
+:depends-on rdf:type owl:ObjectProperty ;
+            rdfs:comment """This dependence is specifica and existential: x depends on y if and only if x exists at some time and at any time when x exists so does y.
+(the predicate PRE(x,t) -- x exists at time t -- is omitted from this ontology, since it is only used to define the depends-on relation, in a way that is not implementable in OWL)""" ,
+                         "dependsOn(x,y) ⇐⇒(∃t(PRE(x,t)) ∧∀t(PRE(x,t) =⇒PRE(y,t)))" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#described-by
+:described-by rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :Behaviour .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#electric-coupling
+:electric-coupling rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf :structural-coupling ;
+                   rdf:type owl:SymmetricProperty .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#external-to
+:external-to rdf:type owl:ObjectProperty ;
+             rdfs:comment "This relation expresses the fact that two entities are 'external'. The precise definition of the external-to relation depends on the underlying reference ontology. Using DOLCE we defined it as follows: x is external to y if and only if x is neither a quality of y, nor one of y’s constituents, nor x and y have parts in common." ,
+                          "externalTo(x,y) ⇐⇒¬(qt(x,y) ∨constitutes(x,y) ∨O(x,y))" ;
+             rdfs:label "external-to" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#founded-on
+:founded-on rdf:type owl:ObjectProperty .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#function-of
+:function-of rdf:type owl:ObjectProperty ;
+             rdfs:domain :SystemicFunction ;
+             rdfs:range :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#generalizes
+:generalizes rdf:type owl:ObjectProperty ;
+             owl:inverseOf :specializes .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#main-function
+:main-function rdf:type owl:ObjectProperty ;
+               rdfs:domain :SystemicFunction ;
+               rdfs:range :EngineeringMethod .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#part-of
+:part-of rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf :component-of ,
+                            <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#part> ;
+         rdfs:comment "constant part-of relation" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#partecipated-by-doer
+:partecipated-by-doer rdf:type owl:ObjectProperty ;
+                      owl:inverseOf :participates-as-doer .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#participate-in
+:participate-in rdf:type owl:ObjectProperty ;
+                owl:equivalentProperty <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#constant-participant> ;
+                rdfs:subPropertyOf owl:topObjectProperty ;
+                rdfs:domain :TechnicalArtifact ;
+                rdfs:range :Process .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#participates-as-doer
+:participates-as-doer rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :participate-in ;
+                      rdfs:domain :TechnicalArtifact ;
+                      rdfs:range :Behaviour ;
+                      rdfs:comment """This is a processual role contextualized by a behavior. For example, a cutting action entails that there is something that is the subject of the action, say a saw (or the system formed by a person or machine using the saw), and the object of the action, say a beam of wood. The same holds for pumping, joining, and other behaviors that can be described by transitive verbs.
+The action subjects participate-as-doer to the behavior.""" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#participates-as-flow
+:participates-as-flow rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf :participate-in ;
+                      rdfs:range :Behaviour ;
+                      rdfs:comment """This is a processual role contextualized by a behavior. For example, a cutting action entails that there is something that is the subject of the action, say a saw (or the system formed by a person or machine using the saw), and the object of the action, say a beam of wood. The same holds for pumping, joining, and other behaviors that can be described by transitive verbs.
+The action objects participate-as-flow to the behavior.
+
+We do not add a Flow class to this ontology, leaving the issue to further research, or to domain-level extensions of this ontology.""" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#plays-as
+:plays-as rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf :classified-by ;
+          rdfs:range :Role .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#quale-of
+:quale-of rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          owl:inverseOf <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#quale-of> .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#quality-of
+:quality-of rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            owl:inverseOf <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#has-quality> ;
+            rdfs:domain :Quality .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#realized-in
+:realized-in rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain :Capability ;
+             rdfs:range :Behaviour .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#specializes
+:specializes rdf:type owl:ObjectProperty ;
+             rdfs:domain :Concept ;
+             rdfs:range :Concept .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#structural-coupling
+:structural-coupling rdf:type owl:ObjectProperty ;
+                     rdfs:domain :TechnicalArtifact ;
+                     rdfs:range :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#sub-function
+:sub-function rdf:type owl:ObjectProperty ;
+              rdfs:domain :SystemicFunction ;
+              rdfs:range :EngineeringMethod .
+
+
+###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#constant-participant
+
+###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#has-quality
+
+###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#quale-of
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.co-ode.org/ontologies/ont.owl#has-direct-quale
+:has-direct-quale rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.co-ode.org/ontologies/ont.owl#Battery
+:Battery rdf:type owl:Class ;
+         rdfs:subClassOf :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#BatteryVoltage
+:BatteryVoltage rdf:type owl:Class ;
+                rdfs:subClassOf :Capacity .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Behaviour
+:Behaviour rdf:type owl:Class ;
+           rdfs:subClassOf :Perdurant ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty [ owl:inverseOf :participates-as-doer
+                                            ] ;
+                             owl:someValuesFrom :TechnicalArtifact
+                           ] ,
+                           [ rdf:type owl:Restriction ;
+                             owl:onProperty [ owl:inverseOf :participates-as-flow
+                                            ] ;
+                             owl:someValuesFrom owl:Thing
+                           ] .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Capability
+:Capability rdf:type owl:Class ;
+            rdfs:subClassOf :RelationalQuality ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :founded-on ;
+                              owl:someValuesFrom :Capacity
+                            ] ;
+            rdfs:comment "A capability is a relational quality and is founded on some capacity" ,
+                         "Capability(x) ⇒relationalQt(x) ∧∃y(founded(x,y) ∧Capacity(y))" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Capacity
+:Capacity rdf:type owl:Class ;
+          rdfs:subClassOf :RelationalQuality ,
+                          [ rdf:type owl:Restriction ;
+                            owl:onProperty :founded-on ;
+                            owl:someValuesFrom :IntrinsicQuality
+                          ] ;
+          rdfs:comment "A capacity is a relational quality and is founded on some intrinsic quality" ,
+                       "Capacity(x) ⇒relationalQt(x) ∧∃y(founded(x,y) ∧intrinsicQt(y))" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Cilinder
+:Cilinder rdf:type owl:Class ;
+          rdfs:subClassOf :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#CloseCircuit
+:CloseCircuit rdf:type owl:Class ;
+              rdfs:subClassOf :Capability .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Concept
+:Concept rdf:type owl:Class ;
+         rdfs:subClassOf :Non-AgentiveSocialObject .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Description
+:Description rdf:type owl:Class ;
+             rdfs:subClassOf :Non-AgentiveSocialObject .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#ElectricSwitch
+:ElectricSwitch rdf:type owl:Class ;
+                rdfs:subClassOf :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#EngineeringFunction
+:EngineeringFunction rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                           owl:onProperty :main-function ;
+                                           owl:someValuesFrom :EngineeringMethod
+                                         ] ;
+                     rdfs:subClassOf :Role ;
+                     rdfs:comment "An engineering function is any main-function role defined by a method-description, and, therefore, contex-tualized by a functional decomposition relation" ,
+                                  "FunctionEng(x) ⇐⇒∃y(Method(y) ∧mainFunction(x,y))" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#EngineeringMethod
+:EngineeringMethod rdf:type owl:Class ;
+                   rdfs:subClassOf :Description ;
+                   rdfs:comment """Descriptions of the knowledge that engineers share about ways of implementing
+functions through functional decomposition""" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#FlowRate
+:FlowRate rdf:type owl:Class ;
+          rdfs:subClassOf :Capacity .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#GenerateElectricEnergy
+:GenerateElectricEnergy rdf:type owl:Class ;
+                        rdfs:subClassOf :Capability .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Goal
+:Goal rdf:type owl:Class ;
+      rdfs:subClassOf :Description ;
+      rdfs:comment "Goals are selected states-description of a technical artifact." .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Heating
+:Heating rdf:type owl:Class ;
+         rdfs:subClassOf :Capability .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#IntrinsicQuality
+:IntrinsicQuality rdf:type owl:Class ;
+                  owl:equivalentClass [ owl:intersectionOf ( :Quality
+                                                             [ rdf:type owl:Class ;
+                                                               owl:complementOf :RelationalQuality
+                                                             ]
+                                                           ) ;
+                                        rdf:type owl:Class
+                                      ] ;
+                  rdfs:subClassOf :Quality ;
+                  rdfs:comment "We define relational qualities as the class complementary to Relational qualities" ,
+                               "intrinsicQt(x) ⇐⇒(Q(x) ∧¬relationalQt(x))" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Length
+:Length rdf:type owl:Class ;
+        rdfs:subClassOf :IntrinsicQuality .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Mass
+:Mass rdf:type owl:Class ;
+      rdfs:subClassOf :IntrinsicQuality .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Motor
+:Motor rdf:type owl:Class ;
+       rdfs:subClassOf :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Non-AgentiveSocialObject
+:Non-AgentiveSocialObject rdf:type owl:Class ;
+                          rdfs:subClassOf <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#non-physical-object> ;
+                          rdfs:comment "Non-Agentive Social Object" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#OntologicalFunction
+:OntologicalFunction rdf:type owl:Class ;
+                     rdfs:subClassOf :Role ,
+                                     [ owl:intersectionOf ( [ rdf:type owl:Class ;
+                                                              owl:complementOf [ rdf:type owl:Restriction ;
+                                                                                 owl:onProperty :depends-on ;
+                                                                                 owl:someValuesFrom :System
+                                                                               ]
+                                                            ]
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty :generalizes ;
+                                                              owl:someValuesFrom :SystemicFunction
+                                                            ]
+                                                          ) ;
+                                       rdf:type owl:Class
+                                     ] ;
+                     rdfs:comment "Ontological functions are functions that do not depend on either a method nor a system, and are generalisations of systemic functions" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#OpenCircuit
+:OpenCircuit rdf:type owl:Class ;
+             rdfs:subClassOf :Capability .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Perdurant
+:Perdurant rdf:type owl:Class ;
+           owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#perdurant> .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#PhysicalObject
+:PhysicalObject rdf:type owl:Class ;
+                owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#physical-object> .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Pipe
+:Pipe rdf:type owl:Class ;
+      rdfs:subClassOf :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Process
+:Process rdf:type owl:Class ;
+         owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#process> ;
+         rdfs:subClassOf :StativePerdurant .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Pump
+:Pump rdf:type owl:Class ;
+      rdfs:subClassOf :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Pumping
+:Pumping rdf:type owl:Class ;
+         rdfs:subClassOf :Capability .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Quality
+:Quality rdf:type owl:Class ;
+         owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#quality> .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#RelationalQuality
+:RelationalQuality rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( :Quality
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :founded-on ;
+                                                                owl:someValuesFrom owl:Thing
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] ;
+                   rdfs:subClassOf :Quality ;
+                   rdfs:comment "any quality that specifically existentially depends on some external entity" ,
+                                "relationalQt(x) ⇒(Q(x) ∧∃y(externalTo(x,y) ∧dependsOn(x,y)))" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Resistance
+:Resistance rdf:type owl:Class ;
+            rdfs:subClassOf :Capacity .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Resistor
+:Resistor rdf:type owl:Class ;
+          rdfs:subClassOf :TechnicalArtifact .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Role
+:Role rdf:type owl:Class ;
+      rdfs:subClassOf :Concept ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :classifies ;
+                        owl:allValuesFrom [ rdf:type owl:Restriction ;
+                                            owl:onProperty :founded-on ;
+                                            owl:someValuesFrom :Concept
+                                          ]
+                      ] ;
+      rdfs:comment """A role is (role-)founded on another concept, that is, for all players of that role, there is an instance of that concept that the player is founded-on. 
+So that role-founding is the founded-on relation ‘lifted’ to roles.""" ,
+                   "RL(x) ⇒∃y∀z(playAs(z,x) ⇒∃w(founded(z,w) ∧CL(w,y)))" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Shape
+:Shape rdf:type owl:Class ;
+       rdfs:subClassOf :IntrinsicQuality .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#SpotWelding
+:SpotWelding rdf:type owl:Class ;
+             rdfs:subClassOf :Welding .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#State
+:State rdf:type owl:Class ;
+       owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#state> ;
+       rdfs:subClassOf :StativePerdurant .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#StativePerdurant
+:StativePerdurant rdf:type owl:Class ;
+                  owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#stative> ;
+                  rdfs:subClassOf :Perdurant .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#System
+:System rdf:type owl:Class .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#SystemicFunction
+:SystemicFunction rdf:type owl:Class ;
+                  rdfs:subClassOf :Role ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty :classifies ;
+                                    owl:allValuesFrom [ owl:intersectionOf ( [ owl:intersectionOf ( :Behaviour
+                                                                                                    [ rdf:type owl:Restriction ;
+                                                                                                      owl:onProperty :causally-contributes-to ;
+                                                                                                      owl:someValuesFrom :Goal
+                                                                                                    ]
+                                                                                                  ) ;
+                                                                               rdf:type owl:Class
+                                                                             ]
+                                                                             [ rdf:type owl:Restriction ;
+                                                                               owl:onProperty :founded-on ;
+                                                                               owl:someValuesFrom :System
+                                                                             ]
+                                                                           ) ;
+                                                        rdf:type owl:Class
+                                                      ]
+                                  ] ;
+                  rdfs:comment """FunctionSys(x) ⇐⇒(RL(x) ∧∃y,z,g((System(z) ∧PTA(y,z) ∧goalOf(g,z)) ∧
+∀b((CL(b,x) ⇒(Behaviour(b) ∧participatesAsDoer(y,b) ∧causalContr(b,g)))""" ,
+                               """Systemic functions are understood as role concepts that
+– classify only behaviors, relative to some behaving artifact,
+– are contextualized by a system that contains the behaving artifact and for whom a goal state has been
+selected,
+– the classified behaviors contribute to the goal of the system.""" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#TechnicalArtifact
+:TechnicalArtifact rdf:type owl:Class ;
+                   rdfs:subClassOf :PhysicalObject ;
+                   rdfs:comment """A technical artifact is any physical object that came into being through some intentional technical process, such as, e.g., any car, plane,
+tooling machine, or mechanical device.""" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#VoltageDivider
+:VoltageDivider rdf:type owl:Class ;
+                rdfs:subClassOf :EngineeringMethod ;
+                rdfs:comment "An electrical engineering method used to obtain different voltage values from a voltage source. Through connecting two or more resistores in series with a voltage source, and by calculating the resistance values using Kirchhoff's law, one can design the divider in such a way to obtain any desired voltage value(s) lower then the original voltage input." .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#Welding
+:Welding rdf:type owl:Class ;
+         rdfs:subClassOf :EngineeringMethod .
+
+
+###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#perdurant
+
+###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#physical-object
+
+###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#process
+
+###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#quality
+
+###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#state
+
+###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#stative
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.co-ode.org/ontologies/ont.owl#battery_1
+:battery_1 rdf:type owl:NamedIndividual ,
+                    :Battery ;
+           :electric-coupling :resistor_1 ,
+                              :switch_1 ;
+           :part-of :electrical_circuit_1 .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#battery_voltage_1
+:battery_voltage_1 rdf:type owl:NamedIndividual ,
+                            :BatteryVoltage ;
+                   :quality-of :battery_1 ;
+                   :has-direct-quale "5"^^:volts .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#change_voltage_1
+:change_voltage_1 rdf:type owl:NamedIndividual ,
+                           :OntologicalFunction .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#change_voltage_in_circuit_1_1
+:change_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ;
+                               :function-of :electrical_circuit_1 ;
+                               :main-function :voltage_divider_1 .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#convert_chemical_energy_into_electricity_1
+:convert_chemical_energy_into_electricity_1 rdf:type owl:NamedIndividual ,
+                                                     :OntologicalFunction ;
+                                            rdfs:comment "Ontological function: converting chemical energy into electricity" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#convert_chemical_energy_into_electricity_in_circuit_1
+:convert_chemical_energy_into_electricity_in_circuit_1 rdf:type owl:NamedIndividual ,
+                                                                :SystemicFunction ;
+                                                       :concept-founded-on :electrical_circuit_1 ;
+                                                       :function-of :battery_1 ;
+                                                       :specializes :convert_chemical_energy_into_electricity_1 ;
+                                                       :sub-function :voltage_divider_1 ;
+                                                       rdfs:comment "Systemic function: converting chemical energy into electricity in the context of a specific system (in a specific position)." .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#drop_voltage_in_circuit_1_1
+:drop_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ;
+                             :function-of :resistor_1 ;
+                             :sub-function :voltage_divider_1 .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#drop_voltage_in_circuit_1_2
+:drop_voltage_in_circuit_1_2 rdf:type owl:NamedIndividual ;
+                             :function-of :resistor_2 ;
+                             :sub-function :voltage_divider_1 .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#electrical_circuit_1
+:electrical_circuit_1 rdf:type owl:NamedIndividual ,
+                               :System .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#generate_electricity_1
+:generate_electricity_1 rdf:type owl:NamedIndividual ,
+                                 :GenerateElectricEnergy ;
+                        :definitionally-founded-on :convert_chemical_energy_into_electricity_1 ;
+                        :founded-on :battery_voltage_1 ;
+                        :quality-of :battery_1 ;
+                        rdfs:comment "Individual quality of being able to generate electricity" .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#heating_cap_1
+:heating_cap_1 rdf:type owl:NamedIndividual ,
+                        :Heating ;
+               :founded-on :resistance_1 ;
+               :quality-of :resistor_1 .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#resistance_1
+:resistance_1 rdf:type owl:NamedIndividual ,
+                       :Resistance ;
+              :has-direct-quale "10"^^:ohms .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#resistor_1
+:resistor_1 rdf:type owl:NamedIndividual ,
+                     :Resistor ;
+            :electric-coupling :battery_1 ,
+                               :resistor_2 ;
+            :part-of :electrical_circuit_1 .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#resistor_2
+:resistor_2 rdf:type owl:NamedIndividual ;
+            :electric-coupling :switch_1 .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#switch_1
+:switch_1 rdf:type owl:NamedIndividual ,
+                   :ElectricSwitch ;
+          :electric-coupling :battery_1 ;
+          :part-of :electrical_circuit_1 .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#trasform_electricity_into_heat_1
+:trasform_electricity_into_heat_1 rdf:type owl:NamedIndividual ,
+                                           :SystemicFunction .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#voltage_divider_1
+:voltage_divider_1 rdf:type owl:NamedIndividual ,
+                            :VoltageDivider .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :Battery
+                :Cilinder
+                :ElectricSwitch
+                :Motor
+                :Pipe
+                :Pump
+                :Resistor
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :BatteryVoltage
+                :FlowRate
+                :Resistance
+              )
+] .
+
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :CloseCircuit
+                :GenerateElectricEnergy
+                :Heating
+                :OpenCircuit
+                :Pumping
+              )
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
