@@ -4,16 +4,17 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix DOLCE: <http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#> .
 @base <http://www.co-ode.org/ontologies/ont.owl> .
 
 <http://www.co-ode.org/ontologies/ont.owl> rdf:type owl:Ontology ;
-                                            owl:imports <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl> ;
+                                            owl:imports <http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE> ;
                                             rdfs:comment """Capability, functionality, and engineering methods ontology.
 
 Attachment to the paper \"About functions, behaviours, and capabilities
 in formal ontology and engineering\" in submission to the Semantic Web Journal, this ontology exemplify how the first order theory described in the paper can be translated in OWL.
 
-The DOLCE Lite oontology can be downloaded from the url http://www.loa.istc.cnr.it/dolce/overview.html"""@en .
+The Dolce-owl ontology is the OWL version of Dolce which has been recently submitted to the ISO 21838 standard."""@en .
 
 #################################################################
 #    Datatypes
@@ -50,13 +51,13 @@ The DOLCE Lite oontology can be downloaded from the url http://www.loa.istc.cnr.
 
 ###  http://www.co-ode.org/ontologies/ont.owl#constant-part-of
 :constant-part-of rdf:type owl:ObjectProperty ;
-                  rdfs:subPropertyOf <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#part> ;
+                  rdfs:subPropertyOf owl:topObjectProperty ;
                   rdfs:comment "constant part-of relation" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#definitionally-founded-on
-:definitionally-founded-on rdf:type owl:ObjectProperty ;
-                           rdfs:subPropertyOf owl:topObjectProperty .
+###  http://www.co-ode.org/ontologies/ont.owl#definition-founded-on
+:definition-founded-on rdf:type owl:ObjectProperty ;
+                       rdfs:subPropertyOf owl:topObjectProperty .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#depends-on
@@ -118,7 +119,6 @@ The DOLCE Lite oontology can be downloaded from the url http://www.loa.istc.cnr.
 
 ###  http://www.co-ode.org/ontologies/ont.owl#participate-in
 :participate-in rdf:type owl:ObjectProperty ;
-                owl:equivalentProperty <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#constant-participant> ;
                 rdfs:subPropertyOf owl:topObjectProperty ;
                 rdfs:domain :TechnicalArtifact ;
                 rdfs:range :Process .
@@ -151,14 +151,12 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
 
 ###  http://www.co-ode.org/ontologies/ont.owl#quale-of
 :quale-of rdf:type owl:ObjectProperty ;
-          rdfs:subPropertyOf owl:topObjectProperty ;
-          owl:inverseOf <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#quale-of> .
+          rdfs:subPropertyOf owl:topObjectProperty .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#quality-of
 :quality-of rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf owl:topObjectProperty ;
-            owl:inverseOf <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#has-quality> ;
             rdfs:domain :Quality .
 
 
@@ -186,12 +184,6 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
               rdfs:domain :SystemicFunction ;
               rdfs:range :EngineeringMethod .
 
-
-###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#constant-participant
-
-###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#has-quality
-
-###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#quale-of
 
 #################################################################
 #    Data properties
@@ -348,7 +340,7 @@ functions through functional decomposition""" .
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Non-AgentiveSocialObject
 :Non-AgentiveSocialObject rdf:type owl:Class ;
-                          rdfs:subClassOf <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#non-physical-object> ;
+                          owl:equivalentClass DOLCE:NASO ;
                           rdfs:comment "Non-Agentive Social Object" .
 
 
@@ -378,12 +370,12 @@ functions through functional decomposition""" .
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Perdurant
 :Perdurant rdf:type owl:Class ;
-           owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#perdurant> .
+           owl:equivalentClass DOLCE:PD .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#PhysicalObject
 :PhysicalObject rdf:type owl:Class ;
-                owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#physical-object> .
+                owl:equivalentClass DOLCE:POB .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Pipe
@@ -393,7 +385,7 @@ functions through functional decomposition""" .
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Process
 :Process rdf:type owl:Class ;
-         owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#process> ;
+         owl:equivalentClass DOLCE:PRO ;
          rdfs:subClassOf :StativePerdurant .
 
 
@@ -409,7 +401,7 @@ functions through functional decomposition""" .
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Quality
 :Quality rdf:type owl:Class ;
-         owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#quality> .
+         owl:equivalentClass DOLCE:Q .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#RelationalQuality
@@ -464,13 +456,13 @@ So that role-founding is the founded-on relation ‘lifted’ to roles.""" ,
 
 ###  http://www.co-ode.org/ontologies/ont.owl#State
 :State rdf:type owl:Class ;
-       owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#state> ;
+       owl:equivalentClass DOLCE:ST ;
        rdfs:subClassOf :StativePerdurant .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#StativePerdurant
 :StativePerdurant rdf:type owl:Class ;
-                  owl:equivalentClass <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#stative> ;
+                  owl:equivalentClass DOLCE:STV ;
                   rdfs:subClassOf :Perdurant .
 
 
@@ -526,17 +518,19 @@ tooling machine, or mechanical device.""" .
          rdfs:subClassOf :EngineeringMethod .
 
 
-###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#perdurant
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#NASO
 
-###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#physical-object
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PD
 
-###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#process
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#POB
 
-###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#quality
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PRO
 
-###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#state
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#Q
 
-###  http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#stative
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#ST
+
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#STV
 
 #################################################################
 #    Individuals
@@ -604,7 +598,7 @@ tooling machine, or mechanical device.""" .
 ###  http://www.co-ode.org/ontologies/ont.owl#generate_electricity_1
 :generate_electricity_1 rdf:type owl:NamedIndividual ,
                                  :GenerateElectricEnergy ;
-                        :definitionally-founded-on :convert_chemical_energy_into_electricity_1 ;
+                        :definition-founded-on :convert_chemical_energy_into_electricity_1 ;
                         :founded-on :battery_voltage_1 ;
                         :quality-of :battery_1 ;
                         rdfs:comment "Individual quality of being able to generate electricity" .
