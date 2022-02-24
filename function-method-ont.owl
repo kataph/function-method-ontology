@@ -101,8 +101,8 @@ The DOLCE Lite oontology can be downloaded from the url http://www.loa.istc.cnr.
              owl:inverseOf :specializes .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#instance-founded-on
-:instance-founded-on rdf:type owl:ObjectProperty ;
+###  http://www.co-ode.org/ontologies/ont.owl#instantiation-founded-on
+:instantiation-founded-on rdf:type owl:ObjectProperty ;
                      rdfs:subPropertyOf owl:topObjectProperty .
 
 
