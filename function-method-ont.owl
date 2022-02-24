@@ -48,11 +48,10 @@ The DOLCE Lite oontology can be downloaded from the url http://www.loa.istc.cnr.
 :classifies rdf:type owl:ObjectProperty .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#component-of
-:component-of rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf :part-of ;
-              rdfs:domain :TechnicalArtifact ;
-              rdfs:range :TechnicalArtifact .
+###  http://www.co-ode.org/ontologies/ont.owl#constant-part-of
+:constant-part-of rdf:type owl:ObjectProperty ;
+                  rdfs:subPropertyOf <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#part> ;
+                  rdfs:comment "constant part-of relation" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#definitionally-founded-on
@@ -103,20 +102,13 @@ The DOLCE Lite oontology can be downloaded from the url http://www.loa.istc.cnr.
 
 ###  http://www.co-ode.org/ontologies/ont.owl#instantiation-founded-on
 :instantiation-founded-on rdf:type owl:ObjectProperty ;
-                     rdfs:subPropertyOf owl:topObjectProperty .
+                          rdfs:subPropertyOf owl:topObjectProperty .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#main-function
 :main-function rdf:type owl:ObjectProperty ;
                rdfs:domain :SystemicFunction ;
                rdfs:range :EngineeringMethod .
-
-
-###  http://www.co-ode.org/ontologies/ont.owl#part-of
-:part-of rdf:type owl:ObjectProperty ;
-         rdfs:subPropertyOf :component-of ,
-                            <http://www.loa-cnr.it/ontologies/DOLCE-Lite.owl#part> ;
-         rdfs:comment "constant part-of relation" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#partecipated-by-doer
@@ -553,9 +545,9 @@ tooling machine, or mechanical device.""" .
 ###  http://www.co-ode.org/ontologies/ont.owl#battery_1
 :battery_1 rdf:type owl:NamedIndividual ,
                     :Battery ;
+           :constant-part-of :electrical_circuit_1 ;
            :electric-coupling :resistor_1 ,
-                              :switch_1 ;
-           :part-of :electrical_circuit_1 .
+                              :switch_1 .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#battery_voltage_1
@@ -634,9 +626,9 @@ tooling machine, or mechanical device.""" .
 ###  http://www.co-ode.org/ontologies/ont.owl#resistor_1
 :resistor_1 rdf:type owl:NamedIndividual ,
                      :Resistor ;
+            :constant-part-of :electrical_circuit_1 ;
             :electric-coupling :battery_1 ,
-                               :resistor_2 ;
-            :part-of :electrical_circuit_1 .
+                               :resistor_2 .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#resistor_2
@@ -647,8 +639,8 @@ tooling machine, or mechanical device.""" .
 ###  http://www.co-ode.org/ontologies/ont.owl#switch_1
 :switch_1 rdf:type owl:NamedIndividual ,
                    :ElectricSwitch ;
-          :electric-coupling :battery_1 ;
-          :part-of :electrical_circuit_1 .
+          :constant-part-of :electrical_circuit_1 ;
+          :electric-coupling :battery_1 .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#trasform_electricity_into_heat_1
