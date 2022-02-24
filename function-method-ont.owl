@@ -55,11 +55,6 @@ The DOLCE Lite oontology can be downloaded from the url http://www.loa.istc.cnr.
               rdfs:range :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#concept-founded-on
-:concept-founded-on rdf:type owl:ObjectProperty ;
-                    rdfs:subPropertyOf owl:topObjectProperty .
-
-
 ###  http://www.co-ode.org/ontologies/ont.owl#definitionally-founded-on
 :definitionally-founded-on rdf:type owl:ObjectProperty ;
                            rdfs:subPropertyOf owl:topObjectProperty .
@@ -104,6 +99,11 @@ The DOLCE Lite oontology can be downloaded from the url http://www.loa.istc.cnr.
 ###  http://www.co-ode.org/ontologies/ont.owl#generalizes
 :generalizes rdf:type owl:ObjectProperty ;
              owl:inverseOf :specializes .
+
+
+###  http://www.co-ode.org/ontologies/ont.owl#instance-founded-on
+:instance-founded-on rdf:type owl:ObjectProperty ;
+                     rdfs:subPropertyOf owl:topObjectProperty .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#main-function
@@ -585,7 +585,7 @@ tooling machine, or mechanical device.""" .
 ###  http://www.co-ode.org/ontologies/ont.owl#convert_chemical_energy_into_electricity_in_circuit_1
 :convert_chemical_energy_into_electricity_in_circuit_1 rdf:type owl:NamedIndividual ,
                                                                 :SystemicFunction ;
-                                                       :concept-founded-on :electrical_circuit_1 ;
+                                                       :founded-on :electrical_circuit_1 ;
                                                        :function-of :battery_1 ;
                                                        :specializes :convert_chemical_energy_into_electricity_1 ;
                                                        :sub-function :voltage_divider_1 ;
