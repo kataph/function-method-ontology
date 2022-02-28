@@ -278,8 +278,8 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
 
 ###  http://www.co-ode.org/ontologies/ont.owl#EngineeringMethod
 :EngineeringMethod rdf:type owl:Class ;
-                   rdfs:subClassOf :Concept ;
-                   rdfs:comment """Descriptions of the knowledge that engineers share about ways of implementing
+                   rdfs:subClassOf :Non-AgentiveSocialObject ;
+                   rdfs:comment """Reifications of the knowledge that engineers share about ways of implementing
 functions through functional decomposition""" .
 
 
