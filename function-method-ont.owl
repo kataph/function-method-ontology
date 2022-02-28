@@ -106,10 +106,10 @@ The Dolce-owl ontology is the OWL version of Dolce which has been recently submi
                           rdfs:subPropertyOf owl:topObjectProperty .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#main-function
-:main-function rdf:type owl:ObjectProperty ;
-               rdfs:domain :SystemicFunction ;
-               rdfs:range :EngineeringMethod .
+###  http://www.co-ode.org/ontologies/ont.owl#main-function-of
+:main-function-of rdf:type owl:ObjectProperty ;
+                  rdfs:domain :SystemicFunction ;
+                  rdfs:range :EngineeringMethod .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#partecipated-by-doer
@@ -179,10 +179,10 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
                      rdfs:range :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#sub-function
-:sub-function rdf:type owl:ObjectProperty ;
-              rdfs:domain :SystemicFunction ;
-              rdfs:range :EngineeringMethod .
+###  http://www.co-ode.org/ontologies/ont.owl#sub-function-of
+:sub-function-of rdf:type owl:ObjectProperty ;
+                 rdfs:domain :SystemicFunction ;
+                 rdfs:range :EngineeringMethod .
 
 
 #################################################################
@@ -260,11 +260,6 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
          rdfs:subClassOf :Non-AgentiveSocialObject .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Description
-:Description rdf:type owl:Class ;
-             rdfs:subClassOf :Non-AgentiveSocialObject .
-
-
 ###  http://www.co-ode.org/ontologies/ont.owl#ElectricSwitch
 :ElectricSwitch rdf:type owl:Class ;
                 rdfs:subClassOf :TechnicalArtifact .
@@ -273,7 +268,7 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
 ###  http://www.co-ode.org/ontologies/ont.owl#EngineeringFunction
 :EngineeringFunction rdf:type owl:Class ;
                      owl:equivalentClass [ rdf:type owl:Restriction ;
-                                           owl:onProperty :main-function ;
+                                           owl:onProperty :main-function-of ;
                                            owl:someValuesFrom :EngineeringMethod
                                          ] ;
                      rdfs:subClassOf :Role ;
@@ -283,7 +278,7 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
 
 ###  http://www.co-ode.org/ontologies/ont.owl#EngineeringMethod
 :EngineeringMethod rdf:type owl:Class ;
-                   rdfs:subClassOf :Description ;
+                   rdfs:subClassOf :Concept ;
                    rdfs:comment """Descriptions of the knowledge that engineers share about ways of implementing
 functions through functional decomposition""" .
 
@@ -300,7 +295,11 @@ functions through functional decomposition""" .
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Goal
 :Goal rdf:type owl:Class ;
-      rdfs:subClassOf :Description ;
+      rdfs:subClassOf :Concept ,
+                      [ rdf:type owl:Restriction ;
+                        owl:onProperty :specializes ;
+                        owl:allValuesFrom :StativePerdurant
+                      ] ;
       rdfs:comment "Goals are selected states-description of a technical artifact." .
 
 
@@ -559,7 +558,7 @@ tooling machine, or mechanical device.""" .
 ###  http://www.co-ode.org/ontologies/ont.owl#change_voltage_in_circuit_1_1
 :change_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ;
                                :function-of :electrical_circuit_1 ;
-                               :main-function :voltage_divider_1 .
+                               :main-function-of :voltage_divider_1 .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#convert_chemical_energy_into_electricity_1
@@ -574,20 +573,20 @@ tooling machine, or mechanical device.""" .
                                                        :founded-on :electrical_circuit_1 ;
                                                        :function-of :battery_1 ;
                                                        :specializes :convert_chemical_energy_into_electricity_1 ;
-                                                       :sub-function :voltage_divider_1 ;
+                                                       :sub-function-of :voltage_divider_1 ;
                                                        rdfs:comment "Systemic function: converting chemical energy into electricity in the context of a specific system (in a specific position)." .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#drop_voltage_in_circuit_1_1
 :drop_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ;
                              :function-of :resistor_1 ;
-                             :sub-function :voltage_divider_1 .
+                             :sub-function-of :voltage_divider_1 .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#drop_voltage_in_circuit_1_2
 :drop_voltage_in_circuit_1_2 rdf:type owl:NamedIndividual ;
                              :function-of :resistor_2 ;
-                             :sub-function :voltage_divider_1 .
+                             :sub-function-of :voltage_divider_1 .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#electrical_circuit_1
