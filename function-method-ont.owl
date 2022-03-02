@@ -52,6 +52,8 @@ The Dolce-owl ontology is the OWL version of Dolce which has been recently submi
 ###  http://www.co-ode.org/ontologies/ont.owl#constant-part-of
 :constant-part-of rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf owl:topObjectProperty ;
+                  rdf:type owl:TransitiveProperty ,
+                           owl:ReflexiveProperty ;
                   rdfs:comment "constant part-of relation" .
 
 
@@ -227,11 +229,17 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
 :Capability rdf:type owl:Class ;
             rdfs:subClassOf :RelationalQuality ,
                             [ rdf:type owl:Restriction ;
+                              owl:onProperty :definition-founded-on ;
+                              owl:someValuesFrom :OntologicalFunction
+                            ] ,
+                            [ rdf:type owl:Restriction ;
                               owl:onProperty :founded-on ;
                               owl:someValuesFrom :Capacity
                             ] ;
-            rdfs:comment "A capability is a relational quality and is founded on some capacity" ,
-                         "Capability(x) ⇒relationalQt(x) ∧∃y(founded(x,y) ∧Capacity(y))" .
+            rdfs:comment """A relational quality is a capability if and only if is founded on some capacity and is definition-founded on
+some ontological function""" ,
+                         """Capability(x) ⇐⇒relationalQt(x)∧∃y,z(Capacity(y)∧founded(x,y)∧FunctionOnt(z)∧
+foundedDef(x,z))""" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Capacity
@@ -242,17 +250,12 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
                             owl:someValuesFrom :IntrinsicQuality
                           ] ;
           rdfs:comment "A capacity is a relational quality and is founded on some intrinsic quality" ,
-                       "Capacity(x) ⇒relationalQt(x) ∧∃y(founded(x,y) ∧intrinsicQt(y))" .
+                       "Capacity(x) =⇒relationalQt(x) ∧∃y(founded(x,y) ∧intrinsicQt(y))" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Cilinder
 :Cilinder rdf:type owl:Class ;
           rdfs:subClassOf :TechnicalArtifact .
-
-
-###  http://www.co-ode.org/ontologies/ont.owl#CloseCircuit
-:CloseCircuit rdf:type owl:Class ;
-              rdfs:subClassOf :Capability .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Concept
@@ -272,14 +275,16 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
                                            owl:someValuesFrom :EngineeringMethod
                                          ] ;
                      rdfs:subClassOf :Role ;
-                     rdfs:comment "An engineering function is any main-function role defined by a method-description, and, therefore, contex-tualized by a functional decomposition relation" ,
-                                  "FunctionEng(x) ⇐⇒∃y(Method(y) ∧mainFunction(x,y))" .
+                     rdfs:comment """The first order logic definition of engineering function is the following:
+    FunctionEng(x) ⇐⇒mainFunction(x)
+    “engineering functions and main-functions coincide”
+Instead, In Owl, we give an apporximation, which exploits the relation \"main-function-of\".""" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#EngineeringMethod
 :EngineeringMethod rdf:type owl:Class ;
                    rdfs:subClassOf :Non-AgentiveSocialObject ;
-                   rdfs:comment """Reifications of the knowledge that engineers share about ways of implementing
+                   rdfs:comment """\"Reifications\" of the knowledge that engineers share about ways of implementing
 functions through functional decomposition""" .
 
 
@@ -346,25 +351,23 @@ functions through functional decomposition""" .
 ###  http://www.co-ode.org/ontologies/ont.owl#OntologicalFunction
 :OntologicalFunction rdf:type owl:Class ;
                      rdfs:subClassOf :Role ,
-                                     [ owl:intersectionOf ( [ rdf:type owl:Class ;
-                                                              owl:complementOf [ rdf:type owl:Restriction ;
-                                                                                 owl:onProperty :depends-on ;
-                                                                                 owl:someValuesFrom :System
-                                                                               ]
-                                                            ]
-                                                            [ rdf:type owl:Restriction ;
-                                                              owl:onProperty :generalizes ;
-                                                              owl:someValuesFrom :SystemicFunction
-                                                            ]
-                                                          ) ;
-                                       rdf:type owl:Class
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :generalizes ;
+                                       owl:someValuesFrom :SystemicFunction
+                                     ] ,
+                                     [ rdf:type owl:Restriction ;
+                                       owl:onProperty :generalizes ;
+                                       owl:allValuesFrom [ rdf:type owl:Class ;
+                                                           owl:unionOf ( :OntologicalFunction
+                                                                         :SystemicFunction
+                                                                       )
+                                                         ]
                                      ] ;
-                     rdfs:comment "Ontological functions are functions that do not depend on either a method nor a system, and are generalisations of systemic functions" .
-
-
-###  http://www.co-ode.org/ontologies/ont.owl#OpenCircuit
-:OpenCircuit rdf:type owl:Class ;
-             rdfs:subClassOf :Capability .
+                     rdfs:comment """FunctionOnt(x) =⇒ (∃y(SP(y,x) ∧ FunctionSys(y)) ∧ ∀y(SP(y,x) ∧ ¬FunctionOnt(y) =⇒
+FunctionSys(y)))
+“any ontological function x is specialized by some systemic function y and, beyond ontological functions, it
+classifies systemic functions only”""" ,
+                                  "Ontological functions are functions that do not depend on either a method nor a system, and are generalisations of systemic functions" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Perdurant
@@ -414,8 +417,7 @@ functions through functional decomposition""" .
                                          rdf:type owl:Class
                                        ] ;
                    rdfs:subClassOf :Quality ;
-                   rdfs:comment "any quality that specifically existentially depends on some external entity" ,
-                                "relationalQt(x) ⇒(Q(x) ∧∃y(externalTo(x,y) ∧dependsOn(x,y)))" .
+                   rdfs:comment "Heuristically, any quality that \"depends on\" some external entity." .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Resistance
@@ -432,15 +434,11 @@ functions through functional decomposition""" .
 :Role rdf:type owl:Class ;
       rdfs:subClassOf :Concept ,
                       [ rdf:type owl:Restriction ;
-                        owl:onProperty :classifies ;
-                        owl:allValuesFrom [ rdf:type owl:Restriction ;
-                                            owl:onProperty :founded-on ;
-                                            owl:someValuesFrom :Concept
-                                          ]
+                        owl:onProperty :instantiation-founded-on ;
+                        owl:someValuesFrom :Concept
                       ] ;
-      rdfs:comment """A role is (role-)founded on another concept, that is, for all players of that role, there is an instance of that concept that the player is founded-on. 
-So that role-founding is the founded-on relation ‘lifted’ to roles.""" ,
-                   "RL(x) ⇒∃y∀z(playAs(z,x) ⇒∃w(founded(z,w) ∧CL(w,y)))" .
+      rdfs:comment """RL(x) =⇒∃yfoundedInst(x,y)
+\"“if x is a role, then there is a y on which it is instantiation-founded\"""" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#Shape
@@ -490,8 +488,14 @@ So that role-founding is the founded-on relation ‘lifted’ to roles.""" ,
                                                         rdf:type owl:Class
                                                       ]
                                   ] ;
-                  rdfs:comment """FunctionSys(x) ⇐⇒(RL(x) ∧∃y,z,g((System(z) ∧PTA(y,z) ∧goalOf(g,z)) ∧
-∀b((CL(b,x) ⇒(Behaviour(b) ∧participatesAsDoer(y,b) ∧causalContr(b,g)))""" ,
+                  rdfs:comment """FunctionOfSys(x,y) ⇐⇒(RL(x) ∧∃z,g(System(z) ∧goalOf(g,z) ∧∃b,t(CL(b,x,t)  ∧P(y,z,t))
+    ∀b,t((CL(b,x,t) ∧P(y,z,t)) =⇒(Behaviour(b) ∧participatesAsDoer(y,b,t)
+    ∧causalContr(b,g))))) 
+    “x is a systemic function of y if and only if x is a role and there exist a system z and a goal g for z such that x
+    is satisfied only by behaviors which have y as doer and causally contribute to achieve g, whenever y is part of z”
+
+     FunctionSys(x) ⇐⇒∃yFunctionOfSys(x,y)
+    “x is a systemic function if and only if it is the systemic function of some object y”""" ,
                                """Systemic functions are understood as role concepts that
 – classify only behaviors, relative to some behaving artifact,
 – are contextualized by a system that contains the behaving artifact and for whom a goal state has been
@@ -556,7 +560,8 @@ tooling machine, or mechanical device.""" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#change_voltage_in_circuit_1_1
-:change_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ;
+:change_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ,
+                                        :SystemicFunction ;
                                :function-of :electrical_circuit_1 ;
                                :main-function-of :voltage_divider_1 .
 
@@ -578,20 +583,23 @@ tooling machine, or mechanical device.""" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#drop_voltage_in_circuit_1_1
-:drop_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ;
+:drop_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ,
+                                      :SystemicFunction ;
                              :function-of :resistor_1 ;
                              :sub-function-of :voltage_divider_1 .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#drop_voltage_in_circuit_1_2
-:drop_voltage_in_circuit_1_2 rdf:type owl:NamedIndividual ;
+:drop_voltage_in_circuit_1_2 rdf:type owl:NamedIndividual ,
+                                      :SystemicFunction ;
                              :function-of :resistor_2 ;
                              :sub-function-of :voltage_divider_1 .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#electrical_circuit_1
 :electrical_circuit_1 rdf:type owl:NamedIndividual ,
-                               :System .
+                               :System ;
+                      :constant-part-of :electrical_circuit_1 .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#generate_electricity_1
@@ -625,7 +633,8 @@ tooling machine, or mechanical device.""" .
 
 
 ###  http://www.co-ode.org/ontologies/ont.owl#resistor_2
-:resistor_2 rdf:type owl:NamedIndividual ;
+:resistor_2 rdf:type owl:NamedIndividual ,
+                     :Resistor ;
             :electric-coupling :switch_1 .
 
 
@@ -666,16 +675,6 @@ tooling machine, or mechanical device.""" .
   owl:members ( :BatteryVoltage
                 :FlowRate
                 :Resistance
-              )
-] .
-
-
-[ rdf:type owl:AllDisjointClasses ;
-  owl:members ( :CloseCircuit
-                :GenerateElectricEnergy
-                :Heating
-                :OpenCircuit
-                :Pumping
               )
 ] .
 
