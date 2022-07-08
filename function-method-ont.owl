@@ -1,15 +1,15 @@
-@prefix : <http://www.co-ode.org/ontologies/ont.owl#> .
+@prefix : <https://github.com/kataph/function-method-ontology#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix DOLCE: <http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#> .
-@base <http://www.co-ode.org/ontologies/ont.owl> .
+@base <https://github.com/kataph/function-method-ontology> .
 
-<http://www.co-ode.org/ontologies/ont.owl> rdf:type owl:Ontology ;
-                                            owl:imports <http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE> ;
-                                            rdfs:comment """Capability, functionality, and engineering methods ontology.
+<https://github.com/kataph/function-method-ontology> rdf:type owl:Ontology ;
+                                                      owl:imports <http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE> ;
+                                                      rdfs:comment """Capability, functionality, and engineering methods ontology.
 
 Attachment to the paper \"About functions, behaviours, and capabilities
 in formal ontology and engineering\" in submission to the Semantic Web Journal, this ontology exemplify how the first order theory described in the paper can be translated in OWL.
@@ -20,11 +20,11 @@ The Dolce-owl ontology is the OWL version of Dolce which has been recently submi
 #    Datatypes
 #################################################################
 
-###  http://www.co-ode.org/ontologies/ont.owl#ohms
+###  https://github.com/kataph/function-method-ontology#ohms
 :ohms rdf:type rdfs:Datatype .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#volts
+###  https://github.com/kataph/function-method-ontology#volts
 :volts rdf:type rdfs:Datatype .
 
 
@@ -32,24 +32,24 @@ The Dolce-owl ontology is the OWL version of Dolce which has been recently submi
 #    Object Properties
 #################################################################
 
-###  http://www.co-ode.org/ontologies/ont.owl#causally-contributes-to
+###  https://github.com/kataph/function-method-ontology#causally-contributes-to
 :causally-contributes-to rdf:type owl:ObjectProperty ;
                          rdfs:domain :Perdurant ;
                          rdfs:range :Perdurant ;
                          rdfs:isDefinedBy "This relation abstracts causal explanations of complex occurences.  For example, \"the beam was cut, therefore it fell to the floor\": we could introduce in the domain of discourse two perdurants: \"cutting the beam [in some context]\" and \"falling to the floor [in some context]\" and then state causally-contributes-to(\"cutting the beam\", \"falling to the floor\")" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#classified-by
+###  https://github.com/kataph/function-method-ontology#classified-by
 :classified-by rdf:type owl:ObjectProperty ;
                rdfs:subPropertyOf owl:topObjectProperty ;
                owl:inverseOf :classifies .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#classifies
+###  https://github.com/kataph/function-method-ontology#classifies
 :classifies rdf:type owl:ObjectProperty .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#constant-part-of
+###  https://github.com/kataph/function-method-ontology#constant-part-of
 :constant-part-of rdf:type owl:ObjectProperty ;
                   rdfs:subPropertyOf owl:topObjectProperty ;
                   rdf:type owl:TransitiveProperty ,
@@ -57,76 +57,76 @@ The Dolce-owl ontology is the OWL version of Dolce which has been recently submi
                   rdfs:comment "constant part-of relation" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#definition-founded-on
+###  https://github.com/kataph/function-method-ontology#definition-founded-on
 :definition-founded-on rdf:type owl:ObjectProperty ;
                        rdfs:subPropertyOf owl:topObjectProperty .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#depends-on
+###  https://github.com/kataph/function-method-ontology#depends-on
 :depends-on rdf:type owl:ObjectProperty ;
             rdfs:comment """This dependence is specifica and existential: x depends on y if and only if x exists at some time and at any time when x exists so does y.
 (the predicate PRE(x,t) -- x exists at time t -- is omitted from this ontology, since it is only used to define the depends-on relation, in a way that is not implementable in OWL)""" ,
                          "dependsOn(x,y) ⇐⇒(∃t(PRE(x,t)) ∧∀t(PRE(x,t) =⇒PRE(y,t)))" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#described-by
+###  https://github.com/kataph/function-method-ontology#described-by
 :described-by rdf:type owl:ObjectProperty ;
               rdfs:subPropertyOf owl:topObjectProperty ;
               rdfs:domain :Behaviour .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#electric-coupling
+###  https://github.com/kataph/function-method-ontology#electric-coupling
 :electric-coupling rdf:type owl:ObjectProperty ;
                    rdfs:subPropertyOf :structural-coupling ;
                    rdf:type owl:SymmetricProperty .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#external-to
+###  https://github.com/kataph/function-method-ontology#external-to
 :external-to rdf:type owl:ObjectProperty ;
              rdfs:comment "This relation expresses the fact that two entities are 'external'. The precise definition of the external-to relation depends on the underlying reference ontology. Using DOLCE we defined it as follows: x is external to y if and only if x is neither a quality of y, nor one of y’s constituents, nor x and y have parts in common." ,
                           "externalTo(x,y) ⇐⇒¬(qt(x,y) ∨constitutes(x,y) ∨O(x,y))" ;
              rdfs:label "external-to" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#founded-on
+###  https://github.com/kataph/function-method-ontology#founded-on
 :founded-on rdf:type owl:ObjectProperty .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#function-of
+###  https://github.com/kataph/function-method-ontology#function-of
 :function-of rdf:type owl:ObjectProperty ;
              rdfs:domain :SystemicFunction ;
              rdfs:range :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#generalizes
+###  https://github.com/kataph/function-method-ontology#generalizes
 :generalizes rdf:type owl:ObjectProperty ;
              owl:inverseOf :specializes .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#instantiation-founded-on
+###  https://github.com/kataph/function-method-ontology#instantiation-founded-on
 :instantiation-founded-on rdf:type owl:ObjectProperty ;
                           rdfs:subPropertyOf owl:topObjectProperty .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#main-function-of
+###  https://github.com/kataph/function-method-ontology#main-function-of
 :main-function-of rdf:type owl:ObjectProperty ;
                   rdfs:domain :SystemicFunction ;
                   rdfs:range :EngineeringMethod .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#partecipated-by-doer
+###  https://github.com/kataph/function-method-ontology#partecipated-by-doer
 :partecipated-by-doer rdf:type owl:ObjectProperty ;
                       owl:inverseOf :participates-as-doer .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#participate-in
+###  https://github.com/kataph/function-method-ontology#participate-in
 :participate-in rdf:type owl:ObjectProperty ;
                 rdfs:subPropertyOf owl:topObjectProperty ;
                 rdfs:domain :TechnicalArtifact ;
                 rdfs:range :Process .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#participates-as-doer
+###  https://github.com/kataph/function-method-ontology#participates-as-doer
 :participates-as-doer rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf :participate-in ;
                       rdfs:domain :TechnicalArtifact ;
@@ -135,7 +135,7 @@ The Dolce-owl ontology is the OWL version of Dolce which has been recently submi
 The action subjects participate-as-doer to the behavior.""" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#participates-as-flow
+###  https://github.com/kataph/function-method-ontology#participates-as-flow
 :participates-as-flow rdf:type owl:ObjectProperty ;
                       rdfs:subPropertyOf :participate-in ;
                       rdfs:range :Behaviour ;
@@ -145,43 +145,43 @@ The action objects participate-as-flow to the behavior.
 We do not add a Flow class to this ontology, leaving the issue to further research, or to domain-level extensions of this ontology.""" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#plays-as
+###  https://github.com/kataph/function-method-ontology#plays-as
 :plays-as rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf :classified-by ;
           rdfs:range :Role .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#quale-of
+###  https://github.com/kataph/function-method-ontology#quale-of
 :quale-of rdf:type owl:ObjectProperty ;
           rdfs:subPropertyOf owl:topObjectProperty .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#quality-of
+###  https://github.com/kataph/function-method-ontology#quality-of
 :quality-of rdf:type owl:ObjectProperty ;
             rdfs:subPropertyOf owl:topObjectProperty ;
             rdfs:domain :Quality .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#realized-in
+###  https://github.com/kataph/function-method-ontology#realized-in
 :realized-in rdf:type owl:ObjectProperty ;
              rdfs:subPropertyOf owl:topObjectProperty ;
              rdfs:domain :Capability ;
              rdfs:range :Behaviour .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#specializes
+###  https://github.com/kataph/function-method-ontology#specializes
 :specializes rdf:type owl:ObjectProperty ;
              rdfs:domain :Concept ;
              rdfs:range :Concept .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#structural-coupling
+###  https://github.com/kataph/function-method-ontology#structural-coupling
 :structural-coupling rdf:type owl:ObjectProperty ;
                      rdfs:domain :TechnicalArtifact ;
                      rdfs:range :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#sub-function-of
+###  https://github.com/kataph/function-method-ontology#sub-function-of
 :sub-function-of rdf:type owl:ObjectProperty ;
                  rdfs:domain :SystemicFunction ;
                  rdfs:range :EngineeringMethod .
@@ -191,7 +191,7 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
 #    Data properties
 #################################################################
 
-###  http://www.co-ode.org/ontologies/ont.owl#has-direct-quale
+###  https://github.com/kataph/function-method-ontology#has-direct-quale
 :has-direct-quale rdf:type owl:DatatypeProperty ;
                   rdfs:subPropertyOf owl:topDataProperty .
 
@@ -200,17 +200,52 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
 #    Classes
 #################################################################
 
-###  http://www.co-ode.org/ontologies/ont.owl#Battery
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#NASO
+DOLCE:NASO rdf:type owl:Class ;
+           owl:equivalentClass :Non-AgentiveSocialObject .
+
+
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PD
+DOLCE:PD rdf:type owl:Class ;
+         owl:equivalentClass :Perdurant .
+
+
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#POB
+DOLCE:POB rdf:type owl:Class ;
+          owl:equivalentClass :PhysicalObject .
+
+
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PRO
+DOLCE:PRO rdf:type owl:Class ;
+          owl:equivalentClass :Process .
+
+
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#Q
+DOLCE:Q rdf:type owl:Class ;
+        owl:equivalentClass :Quality .
+
+
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#ST
+DOLCE:ST rdf:type owl:Class ;
+         owl:equivalentClass :State .
+
+
+###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#STV
+DOLCE:STV rdf:type owl:Class ;
+          owl:equivalentClass :StativePerdurant .
+
+
+###  https://github.com/kataph/function-method-ontology#Battery
 :Battery rdf:type owl:Class ;
          rdfs:subClassOf :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#BatteryVoltage
+###  https://github.com/kataph/function-method-ontology#BatteryVoltage
 :BatteryVoltage rdf:type owl:Class ;
                 rdfs:subClassOf :Capacity .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Behaviour
+###  https://github.com/kataph/function-method-ontology#Behaviour
 :Behaviour rdf:type owl:Class ;
            rdfs:subClassOf :Perdurant ,
                            [ rdf:type owl:Restriction ;
@@ -225,7 +260,7 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
                            ] .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Capability
+###  https://github.com/kataph/function-method-ontology#Capability
 :Capability rdf:type owl:Class ;
             rdfs:subClassOf :RelationalQuality ,
                             [ rdf:type owl:Restriction ;
@@ -242,7 +277,7 @@ some ontological function""" ,
 foundedDef(x,z))""" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Capacity
+###  https://github.com/kataph/function-method-ontology#Capacity
 :Capacity rdf:type owl:Class ;
           rdfs:subClassOf :RelationalQuality ,
                           [ rdf:type owl:Restriction ;
@@ -253,22 +288,22 @@ foundedDef(x,z))""" .
                        "Capacity(x) =⇒relationalQt(x) ∧∃y(founded(x,y) ∧intrinsicQt(y))" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Cilinder
+###  https://github.com/kataph/function-method-ontology#Cilinder
 :Cilinder rdf:type owl:Class ;
           rdfs:subClassOf :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Concept
+###  https://github.com/kataph/function-method-ontology#Concept
 :Concept rdf:type owl:Class ;
          rdfs:subClassOf :Non-AgentiveSocialObject .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#ElectricSwitch
+###  https://github.com/kataph/function-method-ontology#ElectricSwitch
 :ElectricSwitch rdf:type owl:Class ;
                 rdfs:subClassOf :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#EngineeringFunction
+###  https://github.com/kataph/function-method-ontology#EngineeringFunction
 :EngineeringFunction rdf:type owl:Class ;
                      owl:equivalentClass [ rdf:type owl:Restriction ;
                                            owl:onProperty :main-function-of ;
@@ -281,24 +316,24 @@ foundedDef(x,z))""" .
 Instead, In Owl, we give an apporximation, which exploits the relation \"main-function-of\".""" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#EngineeringMethod
+###  https://github.com/kataph/function-method-ontology#EngineeringMethod
 :EngineeringMethod rdf:type owl:Class ;
                    rdfs:subClassOf :Non-AgentiveSocialObject ;
                    rdfs:comment """\"Reifications\" of the knowledge that engineers share about ways of implementing
 functions through functional decomposition""" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#FlowRate
+###  https://github.com/kataph/function-method-ontology#FlowRate
 :FlowRate rdf:type owl:Class ;
           rdfs:subClassOf :Capacity .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#GenerateElectricEnergy
+###  https://github.com/kataph/function-method-ontology#GenerateElectricEnergy
 :GenerateElectricEnergy rdf:type owl:Class ;
                         rdfs:subClassOf :Capability .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Goal
+###  https://github.com/kataph/function-method-ontology#Goal
 :Goal rdf:type owl:Class ;
       rdfs:subClassOf :Concept ,
                       [ rdf:type owl:Restriction ;
@@ -308,12 +343,12 @@ functions through functional decomposition""" .
       rdfs:comment "Goals are selected states-description of a technical artifact." .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Heating
+###  https://github.com/kataph/function-method-ontology#Heating
 :Heating rdf:type owl:Class ;
          rdfs:subClassOf :Capability .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#IntrinsicQuality
+###  https://github.com/kataph/function-method-ontology#IntrinsicQuality
 :IntrinsicQuality rdf:type owl:Class ;
                   owl:equivalentClass [ owl:intersectionOf ( :Quality
                                                              [ rdf:type owl:Class ;
@@ -327,28 +362,27 @@ functions through functional decomposition""" .
                                "intrinsicQt(x) ⇐⇒(Q(x) ∧¬relationalQt(x))" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Length
+###  https://github.com/kataph/function-method-ontology#Length
 :Length rdf:type owl:Class ;
         rdfs:subClassOf :IntrinsicQuality .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Mass
+###  https://github.com/kataph/function-method-ontology#Mass
 :Mass rdf:type owl:Class ;
       rdfs:subClassOf :IntrinsicQuality .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Motor
+###  https://github.com/kataph/function-method-ontology#Motor
 :Motor rdf:type owl:Class ;
        rdfs:subClassOf :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Non-AgentiveSocialObject
+###  https://github.com/kataph/function-method-ontology#Non-AgentiveSocialObject
 :Non-AgentiveSocialObject rdf:type owl:Class ;
-                          owl:equivalentClass DOLCE:NASO ;
                           rdfs:comment "Non-Agentive Social Object" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#OntologicalFunction
+###  https://github.com/kataph/function-method-ontology#OntologicalFunction
 :OntologicalFunction rdf:type owl:Class ;
                      rdfs:subClassOf :Role ,
                                      [ rdf:type owl:Restriction ;
@@ -370,43 +404,39 @@ classifies systemic functions only”""" ,
                                   "Ontological functions are functions that do not depend on either a method nor a system, and are generalisations of systemic functions" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Perdurant
-:Perdurant rdf:type owl:Class ;
-           owl:equivalentClass DOLCE:PD .
+###  https://github.com/kataph/function-method-ontology#Perdurant
+:Perdurant rdf:type owl:Class .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#PhysicalObject
-:PhysicalObject rdf:type owl:Class ;
-                owl:equivalentClass DOLCE:POB .
+###  https://github.com/kataph/function-method-ontology#PhysicalObject
+:PhysicalObject rdf:type owl:Class .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Pipe
+###  https://github.com/kataph/function-method-ontology#Pipe
 :Pipe rdf:type owl:Class ;
       rdfs:subClassOf :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Process
+###  https://github.com/kataph/function-method-ontology#Process
 :Process rdf:type owl:Class ;
-         owl:equivalentClass DOLCE:PRO ;
          rdfs:subClassOf :StativePerdurant .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Pump
+###  https://github.com/kataph/function-method-ontology#Pump
 :Pump rdf:type owl:Class ;
       rdfs:subClassOf :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Pumping
+###  https://github.com/kataph/function-method-ontology#Pumping
 :Pumping rdf:type owl:Class ;
          rdfs:subClassOf :Capability .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Quality
-:Quality rdf:type owl:Class ;
-         owl:equivalentClass DOLCE:Q .
+###  https://github.com/kataph/function-method-ontology#Quality
+:Quality rdf:type owl:Class .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#RelationalQuality
+###  https://github.com/kataph/function-method-ontology#RelationalQuality
 :RelationalQuality rdf:type owl:Class ;
                    owl:equivalentClass [ owl:intersectionOf ( :Quality
                                                               [ rdf:type owl:Restriction ;
@@ -420,17 +450,17 @@ classifies systemic functions only”""" ,
                    rdfs:comment "Heuristically, any quality that \"depends on\" some external entity." .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Resistance
+###  https://github.com/kataph/function-method-ontology#Resistance
 :Resistance rdf:type owl:Class ;
             rdfs:subClassOf :Capacity .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Resistor
+###  https://github.com/kataph/function-method-ontology#Resistor
 :Resistor rdf:type owl:Class ;
           rdfs:subClassOf :TechnicalArtifact .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Role
+###  https://github.com/kataph/function-method-ontology#Role
 :Role rdf:type owl:Class ;
       rdfs:subClassOf :Concept ,
                       [ rdf:type owl:Restriction ;
@@ -441,33 +471,31 @@ classifies systemic functions only”""" ,
 \"“if x is a role, then there is a y on which it is instantiation-founded\"""" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Shape
+###  https://github.com/kataph/function-method-ontology#Shape
 :Shape rdf:type owl:Class ;
        rdfs:subClassOf :IntrinsicQuality .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#SpotWelding
+###  https://github.com/kataph/function-method-ontology#SpotWelding
 :SpotWelding rdf:type owl:Class ;
              rdfs:subClassOf :Welding .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#State
+###  https://github.com/kataph/function-method-ontology#State
 :State rdf:type owl:Class ;
-       owl:equivalentClass DOLCE:ST ;
        rdfs:subClassOf :StativePerdurant .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#StativePerdurant
+###  https://github.com/kataph/function-method-ontology#StativePerdurant
 :StativePerdurant rdf:type owl:Class ;
-                  owl:equivalentClass DOLCE:STV ;
                   rdfs:subClassOf :Perdurant .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#System
+###  https://github.com/kataph/function-method-ontology#System
 :System rdf:type owl:Class .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#SystemicFunction
+###  https://github.com/kataph/function-method-ontology#SystemicFunction
 :SystemicFunction rdf:type owl:Class ;
                   rdfs:subClassOf :Role ,
                                   [ rdf:type owl:Restriction ;
@@ -503,43 +531,29 @@ selected,
 – the classified behaviors contribute to the goal of the system.""" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#TechnicalArtifact
+###  https://github.com/kataph/function-method-ontology#TechnicalArtifact
 :TechnicalArtifact rdf:type owl:Class ;
                    rdfs:subClassOf :PhysicalObject ;
                    rdfs:comment """A technical artifact is any physical object that came into being through some intentional technical process, such as, e.g., any car, plane,
 tooling machine, or mechanical device.""" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#VoltageDivider
+###  https://github.com/kataph/function-method-ontology#VoltageDivider
 :VoltageDivider rdf:type owl:Class ;
                 rdfs:subClassOf :EngineeringMethod ;
                 rdfs:comment "An electrical engineering method used to obtain different voltage values from a voltage source. Through connecting two or more resistores in series with a voltage source, and by calculating the resistance values using Kirchhoff's law, one can design the divider in such a way to obtain any desired voltage value(s) lower then the original voltage input." .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#Welding
+###  https://github.com/kataph/function-method-ontology#Welding
 :Welding rdf:type owl:Class ;
          rdfs:subClassOf :EngineeringMethod .
 
-
-###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#NASO
-
-###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PD
-
-###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#POB
-
-###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PRO
-
-###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#Q
-
-###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#ST
-
-###  http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#STV
 
 #################################################################
 #    Individuals
 #################################################################
 
-###  http://www.co-ode.org/ontologies/ont.owl#battery_1
+###  https://github.com/kataph/function-method-ontology#battery_1
 :battery_1 rdf:type owl:NamedIndividual ,
                     :Battery ;
            :constant-part-of :electrical_circuit_1 ;
@@ -547,32 +561,32 @@ tooling machine, or mechanical device.""" .
                               :switch_1 .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#battery_voltage_1
+###  https://github.com/kataph/function-method-ontology#battery_voltage_1
 :battery_voltage_1 rdf:type owl:NamedIndividual ,
                             :BatteryVoltage ;
                    :quality-of :battery_1 ;
                    :has-direct-quale "5"^^:volts .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#change_voltage_1
+###  https://github.com/kataph/function-method-ontology#change_voltage_1
 :change_voltage_1 rdf:type owl:NamedIndividual ,
                            :OntologicalFunction .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#change_voltage_in_circuit_1_1
+###  https://github.com/kataph/function-method-ontology#change_voltage_in_circuit_1_1
 :change_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ,
                                         :SystemicFunction ;
                                :function-of :electrical_circuit_1 ;
                                :main-function-of :voltage_divider_1 .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#convert_chemical_energy_into_electricity_1
+###  https://github.com/kataph/function-method-ontology#convert_chemical_energy_into_electricity_1
 :convert_chemical_energy_into_electricity_1 rdf:type owl:NamedIndividual ,
                                                      :OntologicalFunction ;
                                             rdfs:comment "Ontological function: converting chemical energy into electricity" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#convert_chemical_energy_into_electricity_in_circuit_1
+###  https://github.com/kataph/function-method-ontology#convert_chemical_energy_into_electricity_in_circuit_1
 :convert_chemical_energy_into_electricity_in_circuit_1 rdf:type owl:NamedIndividual ,
                                                                 :SystemicFunction ;
                                                        :founded-on :electrical_circuit_1 ;
@@ -582,27 +596,27 @@ tooling machine, or mechanical device.""" .
                                                        rdfs:comment "Systemic function: converting chemical energy into electricity in the context of a specific system (in a specific position)." .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#drop_voltage_in_circuit_1_1
+###  https://github.com/kataph/function-method-ontology#drop_voltage_in_circuit_1_1
 :drop_voltage_in_circuit_1_1 rdf:type owl:NamedIndividual ,
                                       :SystemicFunction ;
                              :function-of :resistor_1 ;
                              :sub-function-of :voltage_divider_1 .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#drop_voltage_in_circuit_1_2
+###  https://github.com/kataph/function-method-ontology#drop_voltage_in_circuit_1_2
 :drop_voltage_in_circuit_1_2 rdf:type owl:NamedIndividual ,
                                       :SystemicFunction ;
                              :function-of :resistor_2 ;
                              :sub-function-of :voltage_divider_1 .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#electrical_circuit_1
+###  https://github.com/kataph/function-method-ontology#electrical_circuit_1
 :electrical_circuit_1 rdf:type owl:NamedIndividual ,
                                :System ;
                       :constant-part-of :electrical_circuit_1 .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#generate_electricity_1
+###  https://github.com/kataph/function-method-ontology#generate_electricity_1
 :generate_electricity_1 rdf:type owl:NamedIndividual ,
                                  :GenerateElectricEnergy ;
                         :definition-founded-on :convert_chemical_energy_into_electricity_1 ;
@@ -611,20 +625,20 @@ tooling machine, or mechanical device.""" .
                         rdfs:comment "Individual quality of being able to generate electricity" .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#heating_cap_1
+###  https://github.com/kataph/function-method-ontology#heating_cap_1
 :heating_cap_1 rdf:type owl:NamedIndividual ,
                         :Heating ;
                :founded-on :resistance_1 ;
                :quality-of :resistor_1 .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#resistance_1
+###  https://github.com/kataph/function-method-ontology#resistance_1
 :resistance_1 rdf:type owl:NamedIndividual ,
                        :Resistance ;
               :has-direct-quale "10"^^:ohms .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#resistor_1
+###  https://github.com/kataph/function-method-ontology#resistor_1
 :resistor_1 rdf:type owl:NamedIndividual ,
                      :Resistor ;
             :constant-part-of :electrical_circuit_1 ;
@@ -632,25 +646,25 @@ tooling machine, or mechanical device.""" .
                                :resistor_2 .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#resistor_2
+###  https://github.com/kataph/function-method-ontology#resistor_2
 :resistor_2 rdf:type owl:NamedIndividual ,
                      :Resistor ;
             :electric-coupling :switch_1 .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#switch_1
+###  https://github.com/kataph/function-method-ontology#switch_1
 :switch_1 rdf:type owl:NamedIndividual ,
                    :ElectricSwitch ;
           :constant-part-of :electrical_circuit_1 ;
           :electric-coupling :battery_1 .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#trasform_electricity_into_heat_1
+###  https://github.com/kataph/function-method-ontology#trasform_electricity_into_heat_1
 :trasform_electricity_into_heat_1 rdf:type owl:NamedIndividual ,
                                            :SystemicFunction .
 
 
-###  http://www.co-ode.org/ontologies/ont.owl#voltage_divider_1
+###  https://github.com/kataph/function-method-ontology#voltage_divider_1
 :voltage_divider_1 rdf:type owl:NamedIndividual ,
                             :VoltageDivider .
 
