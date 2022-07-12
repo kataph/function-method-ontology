@@ -384,7 +384,7 @@ functions through functional decomposition""" .
 
 ###  https://github.com/kataph/function-method-ontology#OntologicalFunction
 :OntologicalFunction rdf:type owl:Class ;
-                     rdfs:subClassOf :Role ,
+                     rdfs:subClassOf :Concept ,
                                      [ rdf:type owl:Restriction ;
                                        owl:onProperty :generalizes ;
                                        owl:someValuesFrom :SystemicFunction
