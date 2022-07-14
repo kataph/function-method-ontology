@@ -47,5 +47,15 @@ WHERE {
   ?functionSystemic :function-of ?component .
   ?component :constant-part-of :electrical_circuit_1}
 ```
-  
+Select the relevant parameter of a given capability
+```
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX : <https://github.com/kataph/function-method-ontology#>
+SELECT ?capacity ?parameter_value
+WHERE {
+  ?capability :founded-on ?capacity.
+  ?capability :quality-of :battery_1.
+  ?capacity :has-direct-quale ?parameter_value.}
+```
   
