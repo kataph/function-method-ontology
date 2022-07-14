@@ -235,6 +235,16 @@ DOLCE:STV rdf:type owl:Class ;
           owl:equivalentClass :StativePerdurant .
 
 
+###  https://github.com/kataph/function-method-ontology#AmountOfEnergyOntologicalFunction
+:AmountOfEnergyOntologicalFunction rdf:type owl:Class ;
+                                   rdfs:subClassOf :OntologicalFunction .
+
+
+###  https://github.com/kataph/function-method-ontology#AmountOfMatterOntologicalFunction
+:AmountOfMatterOntologicalFunction rdf:type owl:Class ;
+                                   rdfs:subClassOf :OntologicalFunction .
+
+
 ###  https://github.com/kataph/function-method-ontology#Battery
 :Battery rdf:type owl:Class ;
          rdfs:subClassOf :TechnicalArtifact .
@@ -298,6 +308,35 @@ foundedDef(x,z))""" .
          rdfs:subClassOf :Non-AgentiveSocialObject .
 
 
+###  https://github.com/kataph/function-method-ontology#Connect
+:Connect rdf:type owl:Class ;
+         rdfs:subClassOf :PhysicalObjectOntologicalFunction .
+
+
+###  https://github.com/kataph/function-method-ontology#Convert
+:Convert rdf:type owl:Class ;
+         rdfs:subClassOf :OntologicalFunction ;
+         rdfs:comment """Convert(x) ⇐⇒ (CL(y, x) ⇐⇒ E(y) ∧ startState(y, si, ti) ∧ endState(y, s f , t f ) ∧ Goal(s f ) ∧
+∃Φ, Ψ, a(Φ ∈ N R ∧ Ψ ∈ N R ∧ Ψ ∩ Φ = ∅ ∧ PC(a, si, ti) ∧ PC(a, s f , t f ) ∧ Φ(a, ti) ∧ Ψ(a, t f )))
+“A concept is of convert type if and only if it classifies precisely those events that are transitions between a
+starting state (si, with time extension ti) and a desired final state (s f , with extension t f ) and, moreover, there
+is an entity (a) that at time ti is instance of a type (Φ), while at time t f is instance of a different, disjoint, type
+(Ψ). Necessarily, Φ and Ψ are types belonging to the set of all non-rigid types of the underlying ontology
+(N R)”""" .
+
+
+###  https://github.com/kataph/function-method-ontology#ConvertEnergy
+:ConvertEnergy rdf:type owl:Class ;
+               rdfs:subClassOf :AmountOfEnergyOntologicalFunction ,
+                               :Convert .
+
+
+###  https://github.com/kataph/function-method-ontology#Decrease
+:Decrease rdf:type owl:Class ;
+          rdfs:subClassOf :QualityValueOntologicalFunction ;
+          owl:disjointWith :Increase .
+
+
 ###  https://github.com/kataph/function-method-ontology#ElectricSwitch
 :ElectricSwitch rdf:type owl:Class ;
                 rdfs:subClassOf :TechnicalArtifact .
@@ -323,6 +362,11 @@ Instead, In Owl, we give an apporximation, which exploits the relation \"main-fu
 functions through functional decomposition""" .
 
 
+###  https://github.com/kataph/function-method-ontology#FeatureOntologicalFunction
+:FeatureOntologicalFunction rdf:type owl:Class ;
+                            rdfs:subClassOf :OntologicalFunction .
+
+
 ###  https://github.com/kataph/function-method-ontology#FlowRate
 :FlowRate rdf:type owl:Class ;
           rdfs:subClassOf :Capacity .
@@ -343,9 +387,19 @@ functions through functional decomposition""" .
       rdfs:comment "Goals are selected states-description of a technical artifact." .
 
 
+###  https://github.com/kataph/function-method-ontology#Groove
+:Groove rdf:type owl:Class ;
+        rdfs:subClassOf :FeatureOntologicalFunction .
+
+
 ###  https://github.com/kataph/function-method-ontology#Heating
 :Heating rdf:type owl:Class ;
          rdfs:subClassOf :Capability .
+
+
+###  https://github.com/kataph/function-method-ontology#Increase
+:Increase rdf:type owl:Class ;
+          rdfs:subClassOf :QualityValueOntologicalFunction .
 
 
 ###  https://github.com/kataph/function-method-ontology#IntrinsicQuality
@@ -412,6 +466,11 @@ classifies systemic functions only”""" ,
 :PhysicalObject rdf:type owl:Class .
 
 
+###  https://github.com/kataph/function-method-ontology#PhysicalObjectOntologicalFunction
+:PhysicalObjectOntologicalFunction rdf:type owl:Class ;
+                                   rdfs:subClassOf :OntologicalFunction .
+
+
 ###  https://github.com/kataph/function-method-ontology#Pipe
 :Pipe rdf:type owl:Class ;
       rdfs:subClassOf :TechnicalArtifact .
@@ -420,6 +479,11 @@ classifies systemic functions only”""" ,
 ###  https://github.com/kataph/function-method-ontology#Process
 :Process rdf:type owl:Class ;
          rdfs:subClassOf :StativePerdurant .
+
+
+###  https://github.com/kataph/function-method-ontology#ProcessOntologicalFunction
+:ProcessOntologicalFunction rdf:type owl:Class ;
+                            rdfs:subClassOf :OntologicalFunction .
 
 
 ###  https://github.com/kataph/function-method-ontology#Pump
@@ -434,6 +498,11 @@ classifies systemic functions only”""" ,
 
 ###  https://github.com/kataph/function-method-ontology#Quality
 :Quality rdf:type owl:Class .
+
+
+###  https://github.com/kataph/function-method-ontology#QualityValueOntologicalFunction
+:QualityValueOntologicalFunction rdf:type owl:Class ;
+                                 rdfs:subClassOf :OntologicalFunction .
 
 
 ###  https://github.com/kataph/function-method-ontology#RelationalQuality
@@ -464,7 +533,7 @@ classifies systemic functions only”""" ,
 :Role rdf:type owl:Class ;
       rdfs:subClassOf :Concept ,
                       [ rdf:type owl:Restriction ;
-                        owl:onProperty :instantiation-founded-on ;
+                        owl:onProperty :definition-founded-on ;
                         owl:someValuesFrom :Concept
                       ] ;
       rdfs:comment """RL(x) =⇒∃yfoundedInst(x,y)
@@ -672,6 +741,17 @@ tooling machine, or mechanical device.""" .
 #################################################################
 #    General axioms
 #################################################################
+
+[ rdf:type owl:AllDisjointClasses ;
+  owl:members ( :AmountOfMatterOntologicalFunction
+                :Connect
+                :FeatureOntologicalFunction
+                :PhysicalObjectOntologicalFunction
+                :ProcessOntologicalFunction
+                :QualityValueOntologicalFunction
+              )
+] .
+
 
 [ rdf:type owl:AllDisjointClasses ;
   owl:members ( :Battery
