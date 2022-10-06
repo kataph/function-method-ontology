@@ -748,7 +748,7 @@ functions through functional decomposition</rdfs:comment>
     <!-- https://github.com/kataph/function-method-ontology#IntrinsicQuality -->
 
     <owl:Class rdf:about="https://github.com/kataph/function-method-ontology#IntrinsicQuality">
-        <rdfs:subClassOf rdf:resource="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#Q"/>
+        <rdfs:subClassOf rdf:resource="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PQ"/>
         <owl:disjointWith rdf:resource="https://github.com/kataph/function-method-ontology#RelationalQuality"/>
         <rdfs:comment>We define relational qualities as the class complementary to Relational qualities</rdfs:comment>
         <rdfs:comment>intrinsicQt(x) ⇐⇒(Q(x) ∧¬relationalQt(x))</rdfs:comment>
@@ -885,7 +885,7 @@ classifies systemic functions only”</rdfs:comment>
     <!-- https://github.com/kataph/function-method-ontology#RelationalQuality -->
 
     <owl:Class rdf:about="https://github.com/kataph/function-method-ontology#RelationalQuality">
-        <rdfs:subClassOf rdf:resource="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#Q"/>
+        <rdfs:subClassOf rdf:resource="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PQ"/>
         <rdfs:comment>Heuristically, any quality that &quot;depends on&quot; some external entity.</rdfs:comment>
         <rdfs:label>Relational Quality</rdfs:label>
     </owl:Class>
