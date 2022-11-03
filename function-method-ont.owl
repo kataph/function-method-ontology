@@ -1041,6 +1041,16 @@ tooling machine, or mechanical device.</rdfs:comment>
     
 
 
+    <!-- https://github.com/kataph/function-method-ontology#adjust_voltage_in_circuit_1_1 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#adjust_voltage_in_circuit_1_1">
+        <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
+        <function-of rdf:resource="https://github.com/kataph/function-method-ontology#electrical_circuit_1"/>
+        <main-function-of rdf:resource="https://github.com/kataph/function-method-ontology#voltage_divider_1"/>
+    </owl:NamedIndividual>
+    
+
+
     <!-- https://github.com/kataph/function-method-ontology#battery_1 -->
 
     <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#battery_1">
@@ -1065,17 +1075,7 @@ tooling machine, or mechanical device.</rdfs:comment>
     <!-- https://github.com/kataph/function-method-ontology#change_voltage_1 -->
 
     <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#change_voltage_1">
-        <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#OntologicalFunction"/>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://github.com/kataph/function-method-ontology#change_voltage_in_circuit_1_1 -->
-
-    <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#change_voltage_in_circuit_1_1">
-        <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
-        <function-of rdf:resource="https://github.com/kataph/function-method-ontology#electrical_circuit_1"/>
-        <main-function-of rdf:resource="https://github.com/kataph/function-method-ontology#voltage_divider_1"/>
+        <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#QualityValueOntologicalFunction"/>
     </owl:NamedIndividual>
     
 
@@ -1098,6 +1098,17 @@ tooling machine, or mechanical device.</rdfs:comment>
         <specializes rdf:resource="https://github.com/kataph/function-method-ontology#convert_chemical_energy_into_electricity_1"/>
         <sub-function-of rdf:resource="https://github.com/kataph/function-method-ontology#voltage_divider_1"/>
         <rdfs:comment>Systemic function: converting chemical energy into electricity in the context of a specific system (in a specific position).</rdfs:comment>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- https://github.com/kataph/function-method-ontology#dissipate_energy_cap_1 -->
+
+    <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#dissipate_energy_cap_1">
+        <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#Heating"/>
+        <definition-founded-on rdf:resource="https://github.com/kataph/function-method-ontology#change_voltage_1"/>
+        <founded-on rdf:resource="https://github.com/kataph/function-method-ontology#resistance_1"/>
+        <quality-of rdf:resource="https://github.com/kataph/function-method-ontology#resistor_1"/>
     </owl:NamedIndividual>
     
 
@@ -1139,16 +1150,6 @@ tooling machine, or mechanical device.</rdfs:comment>
         <founded-on rdf:resource="https://github.com/kataph/function-method-ontology#battery_voltage_1"/>
         <quality-of rdf:resource="https://github.com/kataph/function-method-ontology#battery_1"/>
         <rdfs:comment>Individual quality of being able to generate electricity</rdfs:comment>
-    </owl:NamedIndividual>
-    
-
-
-    <!-- https://github.com/kataph/function-method-ontology#heating_cap_1 -->
-
-    <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#heating_cap_1">
-        <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#Heating"/>
-        <founded-on rdf:resource="https://github.com/kataph/function-method-ontology#resistance_1"/>
-        <quality-of rdf:resource="https://github.com/kataph/function-method-ontology#resistor_1"/>
     </owl:NamedIndividual>
     
 
