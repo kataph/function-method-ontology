@@ -128,17 +128,6 @@ and only if y is used to define x”.</rdfs:comment>
     
 
 
-    <!-- https://github.com/kataph/function-method-ontology#depends-on -->
-
-    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#depends-on">
-        <rdfs:comment>This dependence is specifica and existential: x depends on y if and only if x exists at some time and at any time when x exists so does y.
-(the predicate PRE(x,t) -- x exists at time t -- is omitted from this ontology, since it is only used to define the depends-on relation, in a way that is not implementable in OWL)</rdfs:comment>
-        <rdfs:comment>dependsOn(x,y) ⇐⇒(∃t(PRE(x,t)) ∧∀t(PRE(x,t) =⇒PRE(y,t)))</rdfs:comment>
-        <rdfs:label>depends-on</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- https://github.com/kataph/function-method-ontology#electric-coupling -->
 
     <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#electric-coupling">
@@ -161,23 +150,6 @@ and only if y is used to define x”.</rdfs:comment>
     
 
 
-    <!-- https://github.com/kataph/function-method-ontology#founded-on -->
-
-    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#founded-on">
-        <owl:inverseOf rdf:resource="https://github.com/kataph/function-method-ontology#founds"/>
-        <rdfs:label>founded-on</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- https://github.com/kataph/function-method-ontology#founds -->
-
-    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#founds">
-        <rdfs:label>founds</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
     <!-- https://github.com/kataph/function-method-ontology#function-of -->
 
     <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#function-of">
@@ -185,28 +157,6 @@ and only if y is used to define x”.</rdfs:comment>
         <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
         <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#TechnicalArtifact"/>
         <rdfs:label>function-of</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- https://github.com/kataph/function-method-ontology#generalized-by -->
-
-    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#generalized-by">
-        <owl:inverseOf rdf:resource="https://github.com/kataph/function-method-ontology#generalizes"/>
-        <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
-        <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
-        <rdfs:label>generalized-by</rdfs:label>
-    </owl:ObjectProperty>
-    
-
-
-    <!-- https://github.com/kataph/function-method-ontology#generalizes -->
-
-    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#generalizes">
-        <owl:inverseOf rdf:resource="https://github.com/kataph/function-method-ontology#specializes"/>
-        <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
-        <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
-        <rdfs:label>generalizes</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -346,14 +296,13 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
     
 
 
-    <!-- https://github.com/kataph/function-method-ontology#specializes -->
+    <!-- https://github.com/kataph/function-method-ontology#sp-dependent-on -->
 
-    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#specializes">
-        <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
-        <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
-        <rdfs:comment>SP(x, y) ⇐⇒ (CN(x) ∧ CN(y) ∧ ∃z, t(CL(z, x, t)) ∧ ∀z, t(CL(z, x, t) =⇒ CL(z, y, t)))
-“A concept x specializes a concept y if and only if all instances of x are also instances of y”</rdfs:comment>
-        <rdfs:label>specializes</rdfs:label>
+    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#sp-dependent-on">
+        <rdfs:comment xml:lang="en">This dependence is specific and existential: x depends on y if and only if x exists at some time and at any time when x exists so does y.
+(the predicate PRE(x,t) -- x exists at time t -- is omitted from this ontology, since it is only used to define the depends-on relation, in a way that is not implementable in OWL)</rdfs:comment>
+        <rdfs:comment>specificallyDependsOn(x,y) ⇐⇒(∃t(PRE(x,t)) ∧∀t(PRE(x,t) =⇒PRE(y,t)))</rdfs:comment>
+        <rdfs:label xml:lang="en">sp-depends-on</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -368,12 +317,35 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
     
 
 
+    <!-- https://github.com/kataph/function-method-ontology#sub-concept-of -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#sub-concept-of">
+        <owl:inverseOf rdf:resource="https://github.com/kataph/function-method-ontology#super-concept-of"/>
+        <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
+        <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
+        <rdfs:comment>subConceptOf(x, y) ⇐⇒ (CN(x) ∧ CN(y) ∧ ∃z, t(CL(z, x, t)) ∧ ∀z, t(CL(z, x, t) =⇒ CL(z, y, t)))
+“A concept x is a sub-concept of a concept y if and only if all instances of x are also instances of y”</rdfs:comment>
+        <rdfs:label>sub-concept-of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://github.com/kataph/function-method-ontology#sub-function-of -->
 
     <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#sub-function-of">
         <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
         <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#EngineeringMethod"/>
         <rdfs:label>sub-function-of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/kataph/function-method-ontology#super-concept-of -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#super-concept-of">
+        <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
+        <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
+        <rdfs:label>super-concept-of</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -410,6 +382,24 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
     
 
 
+    <!-- http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#ASO -->
+
+    <owl:Class rdf:about="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#ASO"/>
+    
+
+
+    <!-- http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#ED -->
+
+    <owl:Class rdf:about="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#ED"/>
+    
+
+
+    <!-- http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#NAPO -->
+
+    <owl:Class rdf:about="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#NAPO"/>
+    
+
+
     <!-- http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#NASO -->
 
     <owl:Class rdf:about="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#NASO"/>
@@ -425,6 +415,12 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
     <!-- http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#POB -->
 
     <owl:Class rdf:about="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#POB"/>
+    
+
+
+    <!-- http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PQ -->
+
+    <owl:Class rdf:about="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PQ"/>
     
 
 
@@ -524,7 +520,7 @@ For instance, a cutting action entails that there is something that is the subje
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#founded-on"/>
+                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#sp-dependent-on"/>
                 <owl:someValuesFrom rdf:resource="https://github.com/kataph/function-method-ontology#Capacity"/>
             </owl:Restriction>
         </rdfs:subClassOf>
@@ -547,22 +543,26 @@ A capability is founded on some capacity</rdfs:comment>
         <rdfs:subClassOf rdf:resource="https://github.com/kataph/function-method-ontology#RelationalQuality"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#founded-on"/>
+                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#sp-dependent-on"/>
                 <owl:someValuesFrom rdf:resource="https://github.com/kataph/function-method-ontology#IntrinsicQuality"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#founds"/>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="https://github.com/kataph/function-method-ontology#sp-dependent-on"/>
+                    </rdf:Description>
+                </owl:onProperty>
                 <owl:someValuesFrom rdf:resource="https://github.com/kataph/function-method-ontology#Capability"/>
             </owl:Restriction>
         </rdfs:subClassOf>
-        <rdfs:comment>Capacity(x) =⇒ relationalQt(x) ∧ ∃y(founded(x, y) ∧ intrinsicQt(y) ∧ bearer(x) =
+        <rdfs:comment>Capacity(x) =⇒ relationalQt(x) ∧ ∃y(specificallyDependentOn(x, y) ∧ intrinsicQt(y) ∧ bearer(x) =
 bearer(y))
-“A capacity is a relational quality and is founded on some intrinsic quality, which is carried by the same
+“A capacity is a relational quality and is dependent on some intrinsic quality, which is carried by the same
 bearer.”</rdfs:comment>
-        <rdfs:comment>Capacity(x) =⇒ ∃y(Capability(y) ∧ founded(y, x))
-“Each capacity founds a capability.”</rdfs:comment>
+        <rdfs:comment>Capacity(x) =⇒ ∃y(Capability(y) ∧ specificallyDependentOn(y, x))
+“Each capacity has a capability which is dependent on that capacity”</rdfs:comment>
         <rdfs:label>Capacity</rdfs:label>
     </owl:Class>
     
@@ -792,13 +792,13 @@ functions through functional decomposition</rdfs:comment>
         <rdfs:subClassOf rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#generalizes"/>
+                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#super-concept-of"/>
                 <owl:someValuesFrom rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
             </owl:Restriction>
         </rdfs:subClassOf>
         <rdfs:subClassOf>
             <owl:Restriction>
-                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#generalizes"/>
+                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#super-concept-of"/>
                 <owl:allValuesFrom>
                     <owl:Class>
                         <owl:unionOf rdf:parseType="Collection">
@@ -974,7 +974,7 @@ classifies systemic functions only”</rdfs:comment>
                                 </owl:intersectionOf>
                             </owl:Class>
                             <owl:Restriction>
-                                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#founded-on"/>
+                                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#sp-dependent-on"/>
                                 <owl:someValuesFrom rdf:resource="https://github.com/kataph/function-method-ontology#System"/>
                             </owl:Restriction>
                         </owl:intersectionOf>
@@ -1093,9 +1093,9 @@ tooling machine, or mechanical device.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#convert_chemical_energy_into_electricity_in_circuit_1">
         <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
-        <founded-on rdf:resource="https://github.com/kataph/function-method-ontology#electrical_circuit_1"/>
         <function-of rdf:resource="https://github.com/kataph/function-method-ontology#battery_1"/>
-        <specializes rdf:resource="https://github.com/kataph/function-method-ontology#convert_chemical_energy_into_electricity_1"/>
+        <sp-dependent-on rdf:resource="https://github.com/kataph/function-method-ontology#electrical_circuit_1"/>
+        <sub-concept-of rdf:resource="https://github.com/kataph/function-method-ontology#convert_chemical_energy_into_electricity_1"/>
         <sub-function-of rdf:resource="https://github.com/kataph/function-method-ontology#voltage_divider_1"/>
         <rdfs:comment>Systemic function: converting chemical energy into electricity in the context of a specific system (in a specific position).</rdfs:comment>
     </owl:NamedIndividual>
@@ -1107,8 +1107,8 @@ tooling machine, or mechanical device.</rdfs:comment>
     <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#dissipate_energy_cap_1">
         <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#Heating"/>
         <definition-founded-on rdf:resource="https://github.com/kataph/function-method-ontology#change_voltage_1"/>
-        <founded-on rdf:resource="https://github.com/kataph/function-method-ontology#resistance_1"/>
         <quality-of rdf:resource="https://github.com/kataph/function-method-ontology#resistor_1"/>
+        <sp-dependent-on rdf:resource="https://github.com/kataph/function-method-ontology#resistance_1"/>
     </owl:NamedIndividual>
     
 
@@ -1147,8 +1147,8 @@ tooling machine, or mechanical device.</rdfs:comment>
     <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#generate_electricity_1">
         <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#GenerateElectricEnergy"/>
         <definition-founded-on rdf:resource="https://github.com/kataph/function-method-ontology#convert_chemical_energy_into_electricity_1"/>
-        <founded-on rdf:resource="https://github.com/kataph/function-method-ontology#battery_voltage_1"/>
         <quality-of rdf:resource="https://github.com/kataph/function-method-ontology#battery_1"/>
+        <sp-dependent-on rdf:resource="https://github.com/kataph/function-method-ontology#battery_voltage_1"/>
         <rdfs:comment>Individual quality of being able to generate electricity</rdfs:comment>
     </owl:NamedIndividual>
     
@@ -1252,5 +1252,5 @@ tooling machine, or mechanical device.</rdfs:comment>
 
 
 
-<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
 

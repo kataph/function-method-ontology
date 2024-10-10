@@ -26,11 +26,11 @@ PREFIX : <https://github.com/kataph/function-method-ontology#>
 SELECT ?component ?functionOntological ?capacity
 WHERE {
   ?functionSystemic :function-of ?component .
-  ?functionSystemic :founded-on :electrical_circuit_1 .
-  ?functionSystemic :specializes ?functionOntological .
+  ?functionSystemic :sp-dependent-on :electrical_circuit_1 .
+  ?functionSystemic :sub-concept-of ?functionOntological .
   ?capability :definition-founded-on ?functionOntological .
   ?capability :quality-of ?component .
-  ?capability :founded-on ?capacity .
+  ?capability :sp-dependent-on ?capacity .
   ?capacity :quality-of ?component}
 ```
   
@@ -54,7 +54,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX : <https://github.com/kataph/function-method-ontology#>
 SELECT ?capacity ?parameter_value
 WHERE {
-  ?capability :founded-on ?capacity.
+  ?capability :sp-dependent-on ?capacity.
   ?capability :quality-of :battery_1.
   ?capacity :has-direct-quale ?parameter_value.}
 ```
