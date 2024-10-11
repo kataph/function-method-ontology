@@ -649,9 +649,9 @@ is an entity (a) that at time ti is instance of a type (Φ), while at time t f i
     
 
 
-    <!-- https://github.com/kataph/function-method-ontology#EngineeringFunction -->
+    <!-- https://github.com/kataph/function-method-ontology#SolvedFunction -->
 
-    <owl:Class rdf:about="https://github.com/kataph/function-method-ontology#EngineeringFunction">
+    <owl:Class rdf:about="https://github.com/kataph/function-method-ontology#SolvedFunction">
         <owl:equivalentClass>
             <owl:Restriction>
                 <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#main-function-of"/>
@@ -659,11 +659,11 @@ is an entity (a) that at time ti is instance of a type (Φ), while at time t f i
             </owl:Restriction>
         </owl:equivalentClass>
         <rdfs:subClassOf rdf:resource="https://github.com/kataph/function-method-ontology#Role"/>
-        <rdfs:comment>The first order logic definition of engineering function is the following:
-    FunctionEng(x) ⇐⇒mainFunction(x)
+        <rdfs:comment>The first order logic definition of solved function is the following:
+    solvedFunction(x) ⇐⇒mainFunction(x)
     “engineering functions and main-functions coincide”
-Instead, In Owl, we give an apporximation, which exploits the relation &quot;main-function-of&quot;.</rdfs:comment>
-        <rdfs:label>Engineering Function</rdfs:label>
+Instead, In Owl, we give an approximation, which exploits the relation &quot;main-function-of&quot;.</rdfs:comment>
+        <rdfs:label>Solved Function</rdfs:label>
     </owl:Class>
     
 
