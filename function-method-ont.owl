@@ -17,7 +17,7 @@
 Attachment to the paper &quot;About functions, behaviours, and capabilities
 in formal ontology and engineering&quot; in submission to the Semantic Web Journal, this ontology exemplify how the first order theory described in the paper can be translated in OWL.
 
-The Dolce-owl ontology is the OWL version of Dolce which has been recently submitted to the ISO 21838 standard.</rdfs:comment>
+The Dolce-owl ontology is an OWL version of Dolce which has been submitted to the ISO 21838 standard.</rdfs:comment>
     </owl:Ontology>
     
 
@@ -150,11 +150,30 @@ and only if y is used to define x”.</rdfs:comment>
     
 
 
+    <!-- https://github.com/kataph/function-method-ontology#follows -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#follows">
+        <rdfs:comment>follows is defined differently depending on its relata:
+
+in the case the relata are perdurants
+
+df31 follows(x, y) =df precedes(y, x)
+
+In the case the relata are types
+df33 follows(Φ, Ψ) =df ∀x(Ψ(x) =⇒ ∃y(Φ(y) ∧ follows(y, x)))
+“Φ follows Ψ if for every instance of Ψ there is an instance of Φ that follows
+it.”
+
+In the case the relata are reified concepts:
+df35 follows(c, d) =df ∀x(CL(x, d) =⇒ ∃y(CL(y, c) ∧ follows(y, x)))</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://github.com/kataph/function-method-ontology#function-of -->
 
     <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#function-of">
-        <owl:inverseOf rdf:resource="https://github.com/kataph/function-method-ontology#has-function"/>
-        <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
+        <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
         <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#TechnicalArtifact"/>
         <rdfs:label>function-of</rdfs:label>
     </owl:ObjectProperty>
@@ -165,7 +184,15 @@ and only if y is used to define x”.</rdfs:comment>
 
     <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#has-function">
         <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#TechnicalArtifact"/>
-        <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
+        <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
+        <rdfs:comment>hasFunction(x, f) ⇐⇒ ∃a, qintentionalSel(a, e, x, q)∧defFounded(q, f)
+
+“An entity has/bears/carries/has ascribed a function iff there is some agent
+that intentionally selects (though event e) a capability (q) of that entity
+that makes the entity able of executing the function.” Here we express the
+link between the capability and the function with the definition-founding
+relation, as was done before. Notice that f may be an ontological function,
+but also some more specific class, such as a systemic function</rdfs:comment>
         <rdfs:label>has-function</rdfs:label>
     </owl:ObjectProperty>
     
@@ -176,6 +203,17 @@ and only if y is used to define x”.</rdfs:comment>
     <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#has-main-function">
         <owl:inverseOf rdf:resource="https://github.com/kataph/function-method-ontology#main-function-of"/>
         <rdfs:label>has-main-function</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/kataph/function-method-ontology#has-systemic-function -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#has-systemic-function">
+        <owl:inverseOf rdf:resource="https://github.com/kataph/function-method-ontology#systemic-function-of"/>
+        <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#TechnicalArtifact"/>
+        <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
+        <rdfs:label>has-systemic-function</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -277,6 +315,27 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
     
 
 
+    <!-- https://github.com/kataph/function-method-ontology#precedes -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#precedes">
+        <rdfs:comment>precedes</rdfs:comment>
+        <rdfs:comment>precedes is defined differently depending on its relata:
+
+in the case the relata are perdurants
+df30 precedes(x, y) =df ∃t, t′(ql(t, x)T ∧ ql(t′, y)T ∧ t ≤ t′)
+“x precedes y if the time extension of x precedes that of y.”
+
+In the case the relata are types
+df32 precedes(Φ, Ψ) =df ∀x(Ψ(x) =⇒ ∃y(Φ(y) ∧ precedes(y, x)))
+“Φ precedes Ψ if for every instance of Ψ there is an instance of Φ that
+precedes it.”
+
+In the case the relata are reified concepts:
+df34 precedes(c, d) =df ∀x(CL(x, d) =⇒ ∃y(CL(y, c) ∧ precedes(y, x)))</rdfs:comment>
+    </owl:ObjectProperty>
+    
+
+
     <!-- https://github.com/kataph/function-method-ontology#quale-of -->
 
     <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#quale-of">
@@ -346,6 +405,16 @@ We do not add a Flow class to this ontology, leaving the issue to further resear
         <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
         <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
         <rdfs:label>super-concept-of</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- https://github.com/kataph/function-method-ontology#systemic-function-of -->
+
+    <owl:ObjectProperty rdf:about="https://github.com/kataph/function-method-ontology#systemic-function-of">
+        <rdfs:domain rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
+        <rdfs:range rdf:resource="https://github.com/kataph/function-method-ontology#TechnicalArtifact"/>
+        <rdfs:label>systemic-function-of</rdfs:label>
     </owl:ObjectProperty>
     
 
@@ -649,25 +718,6 @@ is an entity (a) that at time ti is instance of a type (Φ), while at time t f i
     
 
 
-    <!-- https://github.com/kataph/function-method-ontology#SolvedFunction -->
-
-    <owl:Class rdf:about="https://github.com/kataph/function-method-ontology#SolvedFunction">
-        <owl:equivalentClass>
-            <owl:Restriction>
-                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#main-function-of"/>
-                <owl:someValuesFrom rdf:resource="https://github.com/kataph/function-method-ontology#EngineeringMethod"/>
-            </owl:Restriction>
-        </owl:equivalentClass>
-        <rdfs:subClassOf rdf:resource="https://github.com/kataph/function-method-ontology#Role"/>
-        <rdfs:comment>The first order logic definition of solved function is the following:
-    solvedFunction(x) ⇐⇒mainFunction(x)
-    “engineering functions and main-functions coincide”
-Instead, In Owl, we give an approximation, which exploits the relation &quot;main-function-of&quot;.</rdfs:comment>
-        <rdfs:label>Solved Function</rdfs:label>
-    </owl:Class>
-    
-
-
     <!-- https://github.com/kataph/function-method-ontology#EngineeringMethod -->
 
     <owl:Class rdf:about="https://github.com/kataph/function-method-ontology#EngineeringMethod">
@@ -927,12 +977,46 @@ classifies systemic functions only”</rdfs:comment>
     
 
 
+    <!-- https://github.com/kataph/function-method-ontology#SelectedFunction -->
+
+    <owl:Class rdf:about="https://github.com/kataph/function-method-ontology#SelectedFunction">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#function-of"/>
+                <owl:someValuesFrom rdf:resource="https://github.com/kataph/function-method-ontology#TechnicalArtifact"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://github.com/kataph/function-method-ontology#Concept"/>
+        <rdfs:label>Selected Function</rdfs:label>
+    </owl:Class>
+    
+
+
     <!-- https://github.com/kataph/function-method-ontology#Shape -->
 
     <owl:Class rdf:about="https://github.com/kataph/function-method-ontology#Shape">
         <rdfs:subClassOf rdf:resource="http://www.loa.istc.cnr.it/dolce/dolce-owl/DOLCE#PQ"/>
         <rdfs:subClassOf rdf:resource="https://github.com/kataph/function-method-ontology#IntrinsicQuality"/>
         <rdfs:label>Shape</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- https://github.com/kataph/function-method-ontology#SolvedFunction -->
+
+    <owl:Class rdf:about="https://github.com/kataph/function-method-ontology#SolvedFunction">
+        <owl:equivalentClass>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="https://github.com/kataph/function-method-ontology#main-function-of"/>
+                <owl:someValuesFrom rdf:resource="https://github.com/kataph/function-method-ontology#EngineeringMethod"/>
+            </owl:Restriction>
+        </owl:equivalentClass>
+        <rdfs:subClassOf rdf:resource="https://github.com/kataph/function-method-ontology#Role"/>
+        <rdfs:comment>The first order logic definition of solved function is the following:
+    solvedFunction(x) ⇐⇒mainFunction(x)
+    “engineering functions and main-functions coincide”
+Instead, In Owl, we give an approximation, which exploits the relation &quot;main-function-of&quot;.</rdfs:comment>
+        <rdfs:label>Solved Function</rdfs:label>
     </owl:Class>
     
 
@@ -1045,8 +1129,8 @@ tooling machine, or mechanical device.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#adjust_voltage_in_circuit_1_1">
         <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
-        <function-of rdf:resource="https://github.com/kataph/function-method-ontology#electrical_circuit_1"/>
         <main-function-of rdf:resource="https://github.com/kataph/function-method-ontology#voltage_divider_1"/>
+        <systemic-function-of rdf:resource="https://github.com/kataph/function-method-ontology#electrical_circuit_1"/>
     </owl:NamedIndividual>
     
 
@@ -1093,10 +1177,10 @@ tooling machine, or mechanical device.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#convert_chemical_energy_into_electricity_in_circuit_1">
         <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
-        <function-of rdf:resource="https://github.com/kataph/function-method-ontology#battery_1"/>
         <sp-dependent-on rdf:resource="https://github.com/kataph/function-method-ontology#electrical_circuit_1"/>
         <sub-concept-of rdf:resource="https://github.com/kataph/function-method-ontology#convert_chemical_energy_into_electricity_1"/>
         <sub-function-of rdf:resource="https://github.com/kataph/function-method-ontology#voltage_divider_1"/>
+        <systemic-function-of rdf:resource="https://github.com/kataph/function-method-ontology#battery_1"/>
         <rdfs:comment>Systemic function: converting chemical energy into electricity in the context of a specific system (in a specific position).</rdfs:comment>
     </owl:NamedIndividual>
     
@@ -1117,8 +1201,8 @@ tooling machine, or mechanical device.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#drop_voltage_in_circuit_1_1">
         <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
-        <function-of rdf:resource="https://github.com/kataph/function-method-ontology#resistor_1"/>
         <sub-function-of rdf:resource="https://github.com/kataph/function-method-ontology#voltage_divider_1"/>
+        <systemic-function-of rdf:resource="https://github.com/kataph/function-method-ontology#resistor_1"/>
     </owl:NamedIndividual>
     
 
@@ -1127,8 +1211,8 @@ tooling machine, or mechanical device.</rdfs:comment>
 
     <owl:NamedIndividual rdf:about="https://github.com/kataph/function-method-ontology#drop_voltage_in_circuit_1_2">
         <rdf:type rdf:resource="https://github.com/kataph/function-method-ontology#SystemicFunction"/>
-        <function-of rdf:resource="https://github.com/kataph/function-method-ontology#resistor_2"/>
         <sub-function-of rdf:resource="https://github.com/kataph/function-method-ontology#voltage_divider_1"/>
+        <systemic-function-of rdf:resource="https://github.com/kataph/function-method-ontology#resistor_2"/>
     </owl:NamedIndividual>
     
 
@@ -1252,5 +1336,5 @@ tooling machine, or mechanical device.</rdfs:comment>
 
 
 
-<!-- Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi -->
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
 
